@@ -1,17 +1,26 @@
 {
-  "name": "timed-practice",
+  "name": "moviecards",
+  "homepage": "http://kylejvh.github.io/React-MovieCards",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@hot-loader/react-dom": "^16.10.2",
+    "axios": "^0.19.0",
     "react": "^16.10.2",
+    "react-app-rewire-hot-loader": "^2.0.1",
+    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.10.2",
+    "react-hot-loader": "^4.12.15",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
+    "eject": "react-app-rewired eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -27,5 +36,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^2.2.0",
+    "gh-pages": "^2.1.1"
   }
 }
