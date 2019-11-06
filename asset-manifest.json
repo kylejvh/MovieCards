@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/React-MovieCards/static/css/main.5d264cc7.chunk.css",
+    "main.js": "/React-MovieCards/static/js/main.7bc9e834.chunk.js",
+    "main.js.map": "/React-MovieCards/static/js/main.7bc9e834.chunk.js.map",
+    "runtime-main.js": "/React-MovieCards/static/js/runtime-main.2caa9eb0.js",
+    "runtime-main.js.map": "/React-MovieCards/static/js/runtime-main.2caa9eb0.js.map",
+    "static/js/2.8240196f.chunk.js": "/React-MovieCards/static/js/2.8240196f.chunk.js",
+    "static/js/2.8240196f.chunk.js.map": "/React-MovieCards/static/js/2.8240196f.chunk.js.map",
+    "index.html": "/React-MovieCards/index.html",
+    "precache-manifest.b1ad08c961d245abaf8b996d39a4fedf.js": "/React-MovieCards/precache-manifest.b1ad08c961d245abaf8b996d39a4fedf.js",
+    "service-worker.js": "/React-MovieCards/service-worker.js",
+    "static/css/main.5d264cc7.chunk.css.map": "/React-MovieCards/static/css/main.5d264cc7.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2caa9eb0.js",
+    "static/js/2.8240196f.chunk.js",
+    "static/css/main.5d264cc7.chunk.css",
+    "static/js/main.7bc9e834.chunk.js"
+  ]
+}
