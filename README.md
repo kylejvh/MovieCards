@@ -1,4 +1,12 @@
+A practice project which uses the Movie Database API to search for and display movie data.
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+---
 
 ## Available Scripts
 
