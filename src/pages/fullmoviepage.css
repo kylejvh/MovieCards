@@ -8,6 +8,13 @@ body {
   margin: 0;
 }
 
+/* Home */
+.header-container {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
+
 .container {
   display: flex;
   flex-flow: column;
@@ -54,4 +61,5 @@ body {
 .fab {
   text-decoration: none;
   color: white;
+  float: right;
 }
