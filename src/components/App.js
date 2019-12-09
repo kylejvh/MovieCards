@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
@@ -17,90 +17,25 @@ const GlobalStyle = createGlobalStyle`
     font-family: "Titillium Web";
 `;
 
-const initialState = {
-  isLoading: true,
-  movies: [],
-  pageData: {
-    currentPage: 1,
-    totalPages: null
-  }
-};
-
-const movieSearchReducer = (state, action) => {
-  switch (action.type) {
-    case MOVIE_SEARCH_REQUEST:
-      return {
-        ...state,
-        isLoading: true
-      };
-    case MOVIE_SEARCH_COMPLETE:
-      return {
-        ...state,
-        isLoading: false,
-        movies: action.payload,
-        pageData: action.payload
-      };
-    case INCREMENT_PAGE:
-      return { pageData: state.pageData.currentPage + 1 };
-    case DECREMENT_PAGE:
-      return { pageData: state.pageData.currentPage - 1 };
-    default:
-      return state;
-  }
-};
-
-// write a reducer for clickedMovie actions???
-
-//React Hooks - Reducer Action Types
-const MOVIE_SEARCH_REQUEST = "MOVIE_SEARCH_REQUEST";
-const MOVIE_SEARCH_COMPLETE = "MOVIE_SEARCH_COMPLETE";
-const INCREMENT_PAGE = "INCREMENT_PAGE";
-const DECREMENT_PAGE = "DECREMENT_PAGE";
+// const initialState = {
+//   pageData: {
+//     currentPage: 1,
+//     totalPages: null
+//   }
+// };
 
 const App = () => {
-  const [state, dispatch] = useReducer(movieSearchReducer, initialState);
-
+  const history = useHistory();
   const [clickedMovieState, setClickedMovieState] = useState({
-    movie: [],
-    isClicked: false
+    movie: []
   });
 
-  const history = useHistory();
-
-  // use useffect deps or find a way to run this only if the id changes?
-
-  // Dispatch request helper function - to be passed down as props
-  const searchRequestDispatch = () => {
-    return dispatch({
-      type: MOVIE_SEARCH_REQUEST
-    });
-  };
-
-  // Dispatch complete helper function - to be passed down as props, lifts payload up to be stored in state.
-  const searchCompleteDispatch = payload => {
-    return dispatch({
-      type: MOVIE_SEARCH_COMPLETE,
-      payload
-    });
-  };
-
-  const incrementPageDispatch = payload => {
-    return dispatch({
-      type: INCREMENT_PAGE
-    });
-  };
-
-  // extract to functional component...
-  const handleMovieClick = (id) /* needed? */ => {
-    const clickedMovie = movies.find(movie => movie.id === id);
+  const handleMovieClick = movie => {
     setClickedMovieState({
-      movie: clickedMovie,
-      isClicked: true // needed?
+      movie
     });
     history.push("/moviepage");
   };
-
-  const { movies, isLoading, pageData } = state;
 
   return (
     <>
@@ -109,65 +44,24 @@ const App = () => {
         <Route
           exact
           path="/"
-          render={() => (
-            <Home
-              movies={movies}
-              pageData={pageData}
-              isLoading={isLoading}
-              searchRequest={searchRequestDispatch}
-              searchComplete={searchCompleteDispatch}
-              handleMovieClick={handleMovieClick}
-            />
-          )}
+          render={() => <Home handleMovieClick={handleMovieClick} />}
         />
         <Route
           path="/moviepage"
-          render={() => (
-            <FullMoviePage
-              clickedMovieState={clickedMovieState}
-              isLoading={isLoading}
-            />
-          )}
+          render={() => <FullMoviePage clickedMovieState={clickedMovieState} />}
         />
         <Route
           path="/byactor"
-          render={() => (
-            <DiscoverByActor // needs other state
-              movies={movies}
-              clickedMovieState={clickedMovieState}
-              isLoading={isLoading}
-              searchRequest={searchRequestDispatch}
-              searchComplete={searchCompleteDispatch}
-              handleMovieClick={handleMovieClick}
-            />
-          )}
+          render={() => <DiscoverByActor handleMovieClick={handleMovieClick} />}
         />
         <Route path="/favorites" component={Favorites} />
         <Route
           path="/popular"
-          render={() => (
-            <PopularMovies // needs other state
-              movies={movies}
-              clickedMovieState={clickedMovieState}
-              isLoading={isLoading}
-              searchRequest={searchRequestDispatch}
-              searchComplete={searchCompleteDispatch}
-              handleMovieClick={handleMovieClick}
-            />
-          )}
+          render={() => <PopularMovies handleMovieClick={handleMovieClick} />}
         />
         <Route
           path="/upcoming"
-          render={() => (
-            <UpcomingMovies // needs other state
-              movies={movies}
-              clickedMovieState={clickedMovieState}
-              isLoading={isLoading}
-              searchRequest={searchRequestDispatch}
-              searchComplete={searchCompleteDispatch}
-              handleMovieClick={handleMovieClick}
-            />
-          )}
+          render={() => <UpcomingMovies handleMovieClick={handleMovieClick} />}
         />
       </Switch>
     </>

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 
+import { useHistory } from "react-router-dom";
+
 import AltPoster from "./posterplaceholder.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
-
-import "./moviecard.css";
 
 const CardContainer = styled.div`
   position: relative;
@@ -71,6 +71,8 @@ const MovieCard = props => {
   // !! Potential hover effect to be added later
   const [isHovering, setIsHovering] = useState(false);
 
+  const history = useHistory();
+
   const { poster_path, title, release_date, vote_average, id } = props.movie;
   const { runtime, genres } = props.movie.details;
 
@@ -94,7 +96,7 @@ const MovieCard = props => {
     <CardContainer>
       <StyledImg
         src={poster_path ? imageURL : AltPoster}
-        onClick={() => props.handleMovieClick(id)}
+        onClick={() => props.handleMovieClick(props.movie)}
         alt={`${title} poster`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}

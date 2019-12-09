@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 import Cast from "../components/Cast";
 
 import ExpandButton from "../components/ExpandButton";
-
-import styled from "styled-components";
 
 // import "./fullmoviepage.css";
 
@@ -124,7 +124,8 @@ const FullMoviePage = props => {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
   const { movie } = props.clickedMovieState;
-  const { isLoading } = props;
+
+  const [{ data }] = useAxiosHook();
 
   // Over a certain width, take the top hero image and render it as the background image, overlaying all other components.
   const isMobile = window.innerWidth > 800;
@@ -143,7 +144,6 @@ const FullMoviePage = props => {
     MozBoxShadow: "inset 1px 0px 84px 0px rgba(0,0,0,0.75)"
   };
 
-  console.log(movie);
   const [creditsData, setCreditsData] = useState({
     cast: [],
     crew: {},
@@ -185,7 +185,7 @@ const FullMoviePage = props => {
       crew.composer = result.data.crew.find(
         person => person.job === "Original Music Composer"
       );
-      console.log(result.data.crew);
+      // console.log(result.data.crew);
       setCreditsData({
         cast: cast,
         crew: crew,
@@ -217,6 +217,7 @@ const FullMoviePage = props => {
       </LeftContainer>
       <CenterContainer>
         <MovieTitle>{movie.title}</MovieTitle>
+        {console.log(data)}
         <Text>
           {movie.details.genres
             .map(item => {

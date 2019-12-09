@@ -1,8 +1,8 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-
-import styled from "styled-components";
 
 const StyledInput = styled.input`
   height: 2rem;
@@ -52,24 +52,22 @@ const SearchIcon = styled(FontAwesomeIcon).attrs({ icon: faSearch })`
 
 const Search = props => {
   const [query, setQuery] = useState("");
-
-  const handleSearchSubmit = event => {
-    event.preventDefault();
-    props.onSubmit(query);
-  };
-
-  const handleChange = e => {
-    setQuery(e.target.value);
-  };
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false&840`;
 
   return (
-    <form onSubmit={handleSearchSubmit}>
+    <form
+      onSubmit={event => {
+        props.onSubmit(url);
+        event.preventDefault();
+      }}
+    >
       <StyledInput
         type="text"
         placeholder="Search..."
         name="search"
         autoComplete="off"
-        onChange={handleChange}
+        onChange={event => setQuery(event.target.value)}
       />
       <StyledButton type="submit">
         <SearchIcon />
