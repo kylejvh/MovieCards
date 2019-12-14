@@ -1,6 +1,6 @@
 {
   "name": "moviecards",
-  "homepage": "http://kylejvh.github.io/React-MovieCards",
+  "homepage": "https://kylejvh.github.io/React-MovieCards",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,7 +11,6 @@
     "axios": "^0.19.0",
     "react": "^16.10.2",
     "react-app-rewire-hot-loader": "^2.0.1",
-    "react-app-rewired": "^2.1.4",
     "react-dom": "^16.10.2",
     "react-hot-loader": "^4.12.15",
     "react-router-dom": "^5.1.2",
@@ -43,6 +42,7 @@
   },
   "devDependencies": {
     "eslint-plugin-react-hooks": "^2.2.0",
-    "gh-pages": "^2.1.1"
+    "gh-pages": "^2.1.1",
+    "react-app-rewired": "^2.1.5"
   }
 }
