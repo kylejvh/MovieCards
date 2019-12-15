@@ -10,8 +10,6 @@ import Cast from "../components/Cast";
 
 import ExpandButton from "../components/ExpandButton";
 
-// import "./fullmoviepage.css";
-
 const posterURL = "https://image.tmdb.org/t/p/original/";
 
 const MasterContainer = styled.div`

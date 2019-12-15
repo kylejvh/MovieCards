@@ -1,14 +1,21 @@
 import React from "react";
-import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import styled from "styled-components";
 
-import MovieCard from "../components/MovieCard/MovieCard";
+import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import Navigation from "../components/Navigation/Navigation";
+import Loader from "../components/Loader";
+import MovieCard from "../components/MovieCard/MovieCard";
 
 const MovieContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 1vw 1vw;
+`;
+
+const PageText = styled.h1`
+  font-size: 1.5em;
+  margin: 1.5em 1em 0 1em;
+  color: #7ca579;
 `;
 
 const PopularMovies = props => {
@@ -20,22 +27,26 @@ const PopularMovies = props => {
   const { handleMovieClick } = props;
 
   return (
-    <div>
+    <>
       <Navigation />
-      <h1>movies</h1>
+      <PageText>Currently trending movies.</PageText>
       {isError && <div>An error occured, please try again.</div>}
       {isLoading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <MovieContainer>
           {data.map(movie => {
             return (
-              <MovieCard movie={movie} handleMovieClick={handleMovieClick} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                handleMovieClick={handleMovieClick}
+              />
             );
           })}
         </MovieContainer>
       )}
-    </div>
+    </>
   );
 };
 

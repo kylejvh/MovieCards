@@ -4,6 +4,10 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
+const StyledForm = styled.form`
+  margin: 1.5em 1em;
+`;
+
 const StyledInput = styled.input`
   height: 2rem;
   width: 100px;
@@ -56,7 +60,7 @@ const Search = props => {
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=en-US&query=${query}&page=1&include_adult=false&840`;
 
   return (
-    <form
+    <StyledForm
       onSubmit={event => {
         props.onSubmit(url);
         event.preventDefault();
@@ -72,7 +76,7 @@ const Search = props => {
       <StyledButton type="submit">
         <SearchIcon />
       </StyledButton>
-    </form>
+    </StyledForm>
   );
 };
 

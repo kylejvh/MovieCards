@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 
-import MovieCard from "../components/MovieCard/MovieCard";
 import Navigation from "../components/Navigation/Navigation";
-import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import Search from "../components/Search";
+import Loader from "../components/Loader";
+import MovieCard from "../components/MovieCard/MovieCard";
+import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import PageSwitch from "../components/PageSwitch";
-
 import Favorites from "./Favorites";
 
 const MovieContainer = styled.div`
@@ -27,18 +27,26 @@ const Home = props => {
   // defaults = [1124, 335984, 1551398,  ["374720", ]
 
   return (
-    <div>
+    <>
       <Navigation />
       <Search onSubmit={doFetch} />
-      <MovieContainer>
-        {data.map(movie => {
-          return (
-            <MovieCard movie={movie} handleMovieClick={handleMovieClick} />
-          );
-        })}
-      </MovieContainer>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <MovieContainer>
+          {data.map(movie => {
+            return (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                handleMovieClick={handleMovieClick}
+              />
+            );
+          })}
+        </MovieContainer>
+      )}
       {/* <PageSwitch incrementPage={pageData} /> */}
-    </div>
+    </>
   );
 };
 

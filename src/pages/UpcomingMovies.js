@@ -1,13 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import MovieCard from "../components/MovieCard/MovieCard";
-import Navigation from "../components/Navigation/Navigation";
+
 import useAxiosHook from "../components/DataFetch/useAxiosHook";
+import Navigation from "../components/Navigation/Navigation";
+import Loader from "../components/Loader";
+import MovieCard from "../components/MovieCard/MovieCard";
 
 const MovieContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 1vw 1vw;
+`;
+
+const PageText = styled.h1`
+  font-size: 1.5em;
+  margin: 1.5em 1em 0 1em;
+  color: #7ca579;
+`;
+
+const ErrorText = styled(PageText)`
+  color: #ec0312;
 `;
 
 const UpcomingMovies = props => {
@@ -25,24 +37,26 @@ const UpcomingMovies = props => {
   const [{ data, isLoading, isError }] = useAxiosHook(url);
 
   return (
-    <div>
-      <div className="header-container">
-        <Navigation />
-      </div>
-      <h1>Not Yet Released....</h1>
-      {isError && <div>An error occured, please try again.</div>}
+    <>
+      <Navigation />
+      <PageText>Movies releasing in the next 3 months.</PageText>
+      {isError && <ErrorText>An error occured, please try again.</ErrorText>}
       {isLoading ? (
-        <div>Loading...</div>
+        <Loader />
       ) : (
         <MovieContainer>
           {data.map(movie => {
             return (
-              <MovieCard movie={movie} handleMovieClick={handleMovieClick} />
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                handleMovieClick={handleMovieClick}
+              />
             );
           })}
         </MovieContainer>
       )}
-    </div>
+    </>
   );
 };
 

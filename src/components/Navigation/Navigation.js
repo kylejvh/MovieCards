@@ -18,7 +18,7 @@ const Navigation = props => {
       <HeaderLink to="/" buttonTitle="Search" />
       <HeaderLink to="/upcoming" buttonTitle="Upcoming Movies" />
       <HeaderLink to="/popular" buttonTitle="Popular Movies" />
-      <HeaderLink to="/byactor" buttonTitle="Discover by Actor" />
+      {/* <HeaderLink to="/byactor" buttonTitle="Discover by Actor" /> */}
     </StyledNavbar>
   );
 };
