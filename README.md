@@ -8,6 +8,8 @@
 into creating a fully fleshed out and continuously 
 developed React App.
 
+![](demo.gif)
+
 ---
 
 ## Features
