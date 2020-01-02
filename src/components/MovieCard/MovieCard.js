@@ -8,6 +8,8 @@ import AltPoster from "./posterplaceholder.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 
+import RemoveSelect from "../Favorites/RemoveSelect";
+
 const CardContainer = styled.div`
   position: relative;
 
@@ -62,6 +64,31 @@ const StyledRating = styled.div`
   background-color: rgba(0, 0, 0, 0.808);
 `;
 
+// const RemoveSelect = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   /* text-shadow: #2c3949; */
+//   margin: 0.25rem;
+//   padding: 0.3rem;
+//   width: 100%;
+//   border-radius: 10%;
+//   background-color: rgba(0, 0, 0, 0.808);
+// `;
+
+const StyledCheckbox = styled.input`
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: red;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  text-shadow: #2c3949;
+  margin: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 10%;
+`;
+
 const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
   color: gold;
   margin: 0 0.5rem 0 0;
@@ -112,6 +139,14 @@ const MovieCard = props => {
           <RatingIcon />
           {vote_average}
         </StyledRating>
+      )}
+      {props.removeMode && (
+        <StyledCheckbox
+          name="MarkedForDelete"
+          type="checkbox"
+          id="checkboxer"
+          onChange={() => props.handleCheckboxChange(id)}
+        />
       )}
     </CardContainer>
 

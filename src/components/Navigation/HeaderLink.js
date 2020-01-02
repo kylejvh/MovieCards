@@ -38,7 +38,7 @@ const HeaderLink = props => {
 
   return (
     <StyledNavLink exact to={`${props.to}`}>
-      {props.buttonTitle}{" "}
+      {props.buttonTitle}
     </StyledNavLink>
   );
 };

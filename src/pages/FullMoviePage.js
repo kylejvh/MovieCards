@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+
+import Trailer from "../components/Trailer";
+
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+import AddFavoriteButton from "../components/Favorites/AddFavoriteButton";
 import Cast from "../components/Cast";
-
 import ExpandButton from "../components/ExpandButton";
 
 const posterURL = "https://image.tmdb.org/t/p/original/";
@@ -96,15 +100,27 @@ const MoviePlot = styled(Text)`
   font-size: 0.75em;
 `;
 
-// const PlayButton = styled.button`
-//   height: 3rem;
-//   width: 3rem;
-//   margin: 0;
-//   color: red;
-//   order: 1;
-//   justify-self: center;
-//   align-self: center;
-// `;
+const PlayButton = styled.button`
+  margin: 0;
+  border-radius: 15px;
+  background-color: red;
+  color: white;
+  font: inherit;
+  order: 1;
+  justify-self: center;
+  align-self: center;
+`;
+
+const FavoritesButton = styled.button`
+  margin: 0;
+  border-radius: 15px;
+  background-color: red;
+  color: white;
+  font: inherit;
+  order: 1;
+  justify-self: center;
+  align-self: center;
+`;
 
 const MovieTagline = styled.h3`
   font-size: 1.05em;
@@ -122,8 +138,7 @@ const FullMoviePage = props => {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
   const { movie } = props.clickedMovieState;
-
-  const [{ data }] = useAxiosHook();
+  const { handleFavorites } = props;
 
   // Over a certain width, take the top hero image and render it as the background image, overlaying all other components.
   const isMobile = window.innerWidth > 800;
@@ -199,23 +214,27 @@ const FullMoviePage = props => {
 
   return (
     // Desktop version
+
     <MasterContainer posterPath={movie.backdrop_path}>
+      {console.log(movie)}
       <LeftContainer>
         <Poster src={posterURL + movie.poster_path}></Poster>
-        {movie.details && (
-          <MovieTagline>"{movie.details.tagline}"</MovieTagline>
+        {movie.details.tagline && (
+          <MovieTagline>{movie.details.tagline}.</MovieTagline>
         )}
 
         <a href={`https://www.imdb.com/title/${movie.details.imdb_id}`}>
           {/* <i className="fab fa-imdb fa-2x"></i> */}
         </a>
-        <ExpandButton buttonTitle="Trailer"></ExpandButton>
+        <Trailer urlKey={movie.details.videos.results[0].key} />
+        <FavoritesButton onClick={() => props.onAddFavorite(movie)}>
+          Add to Favorites
+        </FavoritesButton>
         <Link to="/">Temp Back Link</Link>
         {/* Above, only the release date, rating (IMDB), and IMDB Link */}
       </LeftContainer>
       <CenterContainer>
         <MovieTitle>{movie.title}</MovieTitle>
-        {console.log(data)}
         <Text>
           {movie.details.genres
             .map(item => {

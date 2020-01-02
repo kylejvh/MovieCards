@@ -7,7 +7,6 @@ import Loader from "../components/Loader";
 import MovieCard from "../components/MovieCard/MovieCard";
 import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import PageSwitch from "../components/PageSwitch";
-import Favorites from "./Favorites";
 
 const MovieContainer = styled.div`
   display: flex;
