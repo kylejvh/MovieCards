@@ -29,12 +29,13 @@ Quickly access relevent information like runtimes, ratings, release dates, and t
 
 ---
 
-## Support
+## Contact
 
-Reach out to me at one of the following places!
+> Reach out to me at: 
+- kylejvh@gmail.com
 
-- Website at --/
-- Insert contact email here.
+> My portfolio: 
+- https://kylejvh.github.io/kjvh
 
 ---
 
