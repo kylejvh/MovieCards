@@ -2,7 +2,7 @@
 
 ## **<a href="https://kylejvh.github.io/React-MovieCards/" target="_blank">Click here to demo</a>**
 
-> This practice project represents my first foray
+> This project represents my first journey
 > into creating a fully fleshed out and continuously
 > developed React App.
 
