@@ -1,12 +1,10 @@
+# MovieCards
 
-# React-MovieCards
+## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
 
-**<a href="https://kylejvh.github.io/React-MovieCards/" target="_blank">Click here to demo</a>**
-----
-
-> This practice project represents my first foray 
-into creating a fully fleshed out and continuously 
-developed React App.
+> This project represents my first journey
+> into creating a fully fleshed out and continuously
+> developed React App.
 
 ![](demo.gif)
 
@@ -21,12 +19,13 @@ Quickly access relevent information like runtimes, ratings, release dates, and t
 ---
 
 ## Libraries and Technologies
- - Accesses The Movie Database (TMDb) API for movie related data 
- - Uses React, including React Hooks
- - Uses Axios for data fetching, included in a custom React Hook
- - Uses React Router for routing 
- - Styled with Styled Components
- - Uses icons from Styled Icons
+
+- Accesses The Movie Database (TMDb) API for movie related data
+- Uses React, including React Hooks
+- Uses Axios for data fetching, included in a custom React Hook
+- Uses React Router for routing
+- Styled with Styled Components
+- Uses icons from Styled Icons
 
 ---
 
@@ -36,7 +35,7 @@ Quickly access relevent information like runtimes, ratings, release dates, and t
 - kylejvh@gmail.com
 
 > My portfolio: 
-- https://kylejvh.github.io/kjvh
+- <a href="https://www.kylejvh.com/" target="_blank">kylejvh.com</a>
 
 ---
 
