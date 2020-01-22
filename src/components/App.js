@@ -17,7 +17,7 @@ import Favorites from "../pages/Favorites";
 const GlobalStyle = createGlobalStyle`
   ${normalize}
 
-  html {
+  body {
     @import url("https://fonts.googleapis.com/css?family=Titillium+Web:400, 600i&display=swap");
     @import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
     /* font-family: "Nunito", sans-serif; */
