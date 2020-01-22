@@ -2,7 +2,6 @@ import { hot } from "react-hot-loader/root";
 import { Router } from "@reach/router";
 import React from "react";
 
-//import { Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
 import { normalize } from "styled-normalize";
@@ -43,14 +42,6 @@ const App = () => {
         <Favorites path="/favorites" />
         <FullMoviePage path="fullmoviepage" />
       </Router>
-      {/* <Switch>
-        <Route exact path="/" component={PopularMovies}></Route>
-        <Route path="/upcoming" render={() => <UpcomingMovies />} />
-        <Route path="/search" render={() => <Search />} />
-        <Route path="/favorites" component={Favorites}></Route>
-        <Route path="/moviepage" render={() => <FullMoviePage />} />
-       <Route path="/byactor" render={() => <DiscoverByActor />} /> 
-      </Switch> */}
     </Store>
   );
 };
