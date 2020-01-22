@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 
 import styled from "styled-components";
+import { useMediaQuery } from "react-responsive";
+import { navigate } from "@reach/router";
 
-import { useHistory } from "react-router-dom";
+import { CTX } from "../Store/Store";
 
 import AltPoster from "./posterplaceholder.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 
-import RemoveSelect from "../Favorites/RemoveSelect";
+import RemoveFavoriteButton from "../Helper/RemoveFavoriteButton";
 
 const CardContainer = styled.div`
   position: relative;
+  flex: 0 0 9%;
+  display: flex;
+  justify-content: space-around;
 
-  flex: 1 0 15%;
-  margin: 1.5vw 1vw;
+  margin: 1.55vw 1vw;
   border-radius: 10px 10px 0 0;
   transition: transform;
   transition-duration: 0.25s;
@@ -22,10 +26,26 @@ const CardContainer = styled.div`
 
   :hover {
     cursor: pointer;
-    transform: scale(1.1);
+    transform: scale(1.08);
+  }
+
+  @media screen and (max-width: 3000px) {
+    flex: 0 0 10%;
+  }
+
+  @media screen and (max-width: 2000px) {
+    flex: 0 0 13%;
+  }
+
+  @media screen and (max-width: 1440px) {
+    flex: 1 0 15%;
   }
 
   @media screen and (max-width: 1025px) {
+    flex: 1 0 25%;
+  }
+
+  @media screen and (max-width: 640px) {
     flex: 1 0 25%;
   }
 
@@ -43,7 +63,6 @@ const StyledRuntime = styled.div`
   position: absolute;
   top: 0;
   right: 0;
-  text-shadow: #2c3949;
   margin: 0.25rem;
   padding: 0.3rem;
   border-radius: 10%;
@@ -52,119 +71,81 @@ const StyledRuntime = styled.div`
 
 const RuntimeIcon = styled(FontAwesomeIcon).attrs({ icon: faStopwatch })`
   font-size: 1em;
+  margin: 0 0.25rem 0 0;
 `;
 
 const StyledRating = styled.div`
   position: absolute;
   top: 0;
-  /* text-shadow: #2c3949; */
+  left: 0;
   margin: 0.25rem;
   padding: 0.3rem;
   border-radius: 10%;
   background-color: rgba(0, 0, 0, 0.808);
 `;
 
-// const RemoveSelect = styled.div`
-//   position: absolute;
-//   bottom: 0;
-//   /* text-shadow: #2c3949; */
-//   margin: 0.25rem;
-//   padding: 0.3rem;
-//   width: 100%;
-//   border-radius: 10%;
-//   background-color: rgba(0, 0, 0, 0.808);
-// `;
-
-const StyledCheckbox = styled.input`
-  width: 100px;
-  height: 100px;
-  background-color: red;
-  color: red;
-  position: absolute;
-  top: 50%;
-  right: 50%;
-  text-shadow: #2c3949;
-  margin: 0.25rem;
-  padding: 0.3rem;
-  border-radius: 10%;
-`;
-
 const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
   color: gold;
-  margin: 0 0.5rem 0 0;
+  margin: 0 0.25rem 0 0;
 `;
 
 const MovieCard = props => {
-  // !! Potential hover effect to be added later
-  const [isHovering, setIsHovering] = useState(false);
+  const { dispatch } = useContext(CTX);
+  const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
-  const history = useHistory();
-
-  const { poster_path, title, release_date, vote_average, id } = props.movie;
-  const { runtime, genres } = props.movie.details;
+  const { poster_path, title, vote_average } = props.movie;
+  const { runtime } = props.movie.details;
 
   const imageURL = `https://image.tmdb.org/t/p/w780${poster_path}`;
 
-  const handleMouseEnter = () => {
-    setIsHovering(true);
+  function handleMovieClick() {
+    dispatch({ type: "MOVIE_CLICKED", payload: props.movie });
+    navigate(`/fullmoviepage/`, { myMovie: props.movie });
+  }
+
+  const convertRuntime = num => {
+    let hours = num / 60;
+    let rhours = Math.floor(hours);
+    let minutes = (hours - rhours) * 60;
+    let rminutes = Math.round(minutes);
+    return rhours + "h " + rminutes + "m";
   };
 
-  const handleMouseLeave = () => {
-    setIsHovering(false);
+  const convertedRuntime = convertRuntime(runtime);
+
+  const showRuntime = () => {
+    if (!isMobile && runtime !== 0) {
+      return (
+        <StyledRuntime>
+          <RuntimeIcon />
+          {convertedRuntime}
+        </StyledRuntime>
+      );
+    }
   };
 
-  const bottomDiv = (
-    <div className="bottom-div">
-      <p>Releases: {release_date}</p>
-    </div>
-  );
+  const showRating = () => {
+    if (!isMobile && vote_average !== 0) {
+      return (
+        <StyledRating>
+          <RatingIcon />
+          {vote_average}
+        </StyledRating>
+      );
+    }
+  };
 
   return (
     <CardContainer>
       <StyledImg
         src={poster_path ? imageURL : AltPoster}
-        onClick={() => props.handleMovieClick(props.movie)}
+        onClick={handleMovieClick}
         alt={`${title} poster`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
       />
-      {runtime && (
-        <StyledRuntime>
-          <RuntimeIcon />
-          {runtime + " min"}
-        </StyledRuntime>
-      )}
-      {vote_average !== 0 && (
-        <StyledRating>
-          <RatingIcon />
-          {vote_average}
-        </StyledRating>
-      )}
-      {props.removeMode && (
-        <StyledCheckbox
-          name="MarkedForDelete"
-          type="checkbox"
-          id="checkboxer"
-          onChange={() => props.handleCheckboxChange(id)}
-        />
-      )}
+      {showRuntime()}
+      {showRating()}
+      {props.removeMode && <RemoveFavoriteButton movie={props.movie} />}
     </CardContainer>
-
-    //     {isHovering && bottomDiv}
-    //   </div>
-    //   {/* <div className="moviedata-container">
-    //     <div>
-    //       <h4>
-    //         {release_date}
-    //         {genres.map(item => {
-    //           return item.name + ", ";
-    //         })}
-    //       </h4>
-    //       <h1>{title}</h1>
-    //     </div>
-    //     <p>{overview}</p>
-    //   </div> */}
-    // </div>
   );
 };
 

@@ -5,12 +5,6 @@ const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
 // The goal of this component was to create a reusable custom hook to fetch data throughout the app.
 
-// Search - needs to feed in url, query, and Api key
-
-// Upcoming - needs to feed in url wit hdates... and apikey
-
-//Popular - needs the same. All also require the getdails function...
-
 // ! if this is composed properly, useeffect should run every time there is a change in url. so the url can be external, and the url should have the page data plugged in.
 
 const useAxiosHook = myUrl => {
@@ -42,7 +36,7 @@ const useAxiosHook = myUrl => {
         setIsError(true);
       }
 
-      setIsLoading(false);
+      setIsLoading(false); // Should trigger loading spinner, or throw error if axios request fails.
     };
 
     fetchData();

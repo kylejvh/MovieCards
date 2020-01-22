@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
-
+import { CTX } from "../components/Store/Store";
 import Navigation from "../components/Navigation/Navigation";
-import FavoritesBar from "../components/Favorites/FavoritesBar";
 import MovieCard from "../components/MovieCard/MovieCard";
-
-import useFavoriteHook from "../components/Favorites/useFavorite";
 
 const MovieContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
-  margin: 1vw 1vw;
+  width: 100%;
+
+  @media screen and (max-width: 3000px) {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 2000px) {
+    justify-content: center;
+  }
 `;
 
 const PageText = styled.h1`
@@ -19,8 +24,8 @@ const PageText = styled.h1`
   color: #7ca579;
 `;
 
-const RemoveButton = styled.button`
-  margin: 0.5em;
+const RemoveModeButton = styled.button`
+  margin: 0.5em 0em 2em 1em;
   padding: 0.5em;
   border: none;
   outline: none;
@@ -36,99 +41,51 @@ const RemoveButton = styled.button`
 
   :hover {
     cursor: pointer;
-    transform: scale(1.1);
+
     background: #008080;
+  }
+
+  :active {
+    transform: scale(1.1);
   }
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  margin: 1vw 1vw;
 `;
 
-const ConfirmButton = styled(RemoveButton)``;
-const SelectAllButton = styled(RemoveButton)``;
-const SelectNoneButton = styled(RemoveButton)``;
-
-const Favorites = props => {
-  const { favoritesData } = props;
-
-  const [removeMode, setRemoveMode] = useState(false);
-  // const [favoritesData, setFavoritesData] = useState(
-  //   {
-  //     list: [],
-  //     checkedForRemoval: false,
-  //     idsToDelete: []
-  //   }
-
-  //   // Make A list of movies to remove, or save indexes? look up how to delete functionally...
-  // );
-
-  const { handleMovieClick, addToDeleteList } = props;
-
-  // const addFavorite = movie => {
-  //   setFavoritesData({
-  //     list: movie
-  //   });
-  // };
-
-  const handleCheckboxChange = id => {
-    console.log(id, "passed id up if checked");
-    addToDeleteList(id);
-  };
-
-  const onFavClick = () => {
-    setRemoveMode(prevState => !prevState);
-  };
-
-  // either handle state in mylist component,
-  // or
+const Favorites = () => {
+  const [toggleRemove, setToggleRemove] = useState(false);
+  const { state } = useContext(CTX);
+  const { favorites } = state;
 
   return (
     <>
       <Navigation />
-      <PageText>Your list of favorites!</PageText>
+      {favorites.length > 0 ? (
+        <>
+          <PageText>Your list of favorites!</PageText>
+          <ButtonContainer>
+            <RemoveModeButton onClick={() => setToggleRemove(!toggleRemove)}>
+              {toggleRemove ? "Disable Remove Mode" : "Enable Remove Mode"}
+            </RemoveModeButton>
+          </ButtonContainer>
 
-      <ButtonContainer>
-        removecontainer
-        <RemoveButton onClick={onFavClick}>Remove Favorites</RemoveButton>
-        {props.removeMode && <p>Select movies to remove.</p>}
-        <SelectAllButton>Select All</SelectAllButton>
-        <SelectNoneButton>Select None</SelectNoneButton>
-        <ConfirmButton>Confirm Remove?</ConfirmButton>
-      </ButtonContainer>
-
-      <MovieContainer>
-        {favoritesData.list.map(movie => {
-          return (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              handleMovieClick={handleMovieClick}
-              removeMode={removeMode}
-              handleCheckboxChange={handleCheckboxChange}
-            />
-          );
-        })}
-      </MovieContainer>
-
-      {/* {isError && <div>An error occured, please try again.</div>}
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <MovieContainer>
-          {data.map(movie => {
-            return (
+          <MovieContainer>
+            {favorites.map(movie => (
               <MovieCard
                 key={movie.id}
                 movie={movie}
-                handleMovieClick={handleMovieClick}
+                removeMode={toggleRemove}
               />
-            );
-          })}
-        </MovieContainer>
-      )} */}
+            ))}
+          </MovieContainer>
+        </>
+      ) : (
+        <PageText>
+          You have no favorites! Add favorites to quickly access them here.
+        </PageText>
+      )}
     </>
   );
 };

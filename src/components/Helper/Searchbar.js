@@ -54,6 +54,7 @@ const SearchIcon = styled(FontAwesomeIcon).attrs({ icon: faSearch })`
   font-size: 1em;
 `;
 
+// Passes query entered in Text Input into onSubmit, which takes in modified URL query as param and sends it to axiosFetch hook.
 const Search = props => {
   const [query, setQuery] = useState("");
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;

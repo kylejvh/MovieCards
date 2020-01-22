@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Play } from "styled-icons/fa-solid/Play";
@@ -6,24 +6,24 @@ import { Play } from "styled-icons/fa-solid/Play";
 // import ReactPlayer from "react-player";
 
 const PlayButton = styled.button`
-  margin: 0.5em;
-  padding: 0.5em;
+  margin: 0.5rem;
+  padding: 0.3rem 0.5rem;
   border: none;
   outline: none;
   border-radius: 0.8em;
   color: white;
-  font: inherit;
   font-size: 1.1rem;
-  justify-self: center;
-  align-self: center;
   transition: background 250ms ease-in-out, transform 150ms ease;
   text-decoration: none;
   background: #2769b4;
 
   :hover {
     cursor: pointer;
-    transform: scale(1.1);
     background: #008080;
+  }
+
+  :active {
+    transform: scale(1.1);
   }
 `;
 
@@ -34,17 +34,10 @@ const PlayIcon = styled(Play)`
   margin: 0em 0.35em;
 `;
 
+// TMDB API returns a section of YouTube URL to specify the trailer for the respective movie.
 const Trailer = props => {
   const { urlKey } = props;
-
-  //   const [clicked, setClicked] = useState(false);
-
   const url = `https://www.youtube.com/watch?v=${urlKey}`;
-
-  //   const handleClick = () => {
-  //     // interact with react player...
-  //     setClicked(true);
-  //   };
 
   return (
     <>
@@ -52,16 +45,6 @@ const Trailer = props => {
         <PlayIcon />
         Watch Trailer
       </PlayButton>
-
-      {/* {clicked && (
-        <div>
-          <ReactPlayer
-            url={url}
-            playing
-            onEnded={() => setClicked(false)}
-          ></ReactPlayer>
-        </div>
-      )} */}
     </>
   );
 };

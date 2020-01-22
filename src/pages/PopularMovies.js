@@ -3,13 +3,21 @@ import styled from "styled-components";
 
 import useAxiosHook from "../components/DataFetch/useAxiosHook";
 import Navigation from "../components/Navigation/Navigation";
-import Loader from "../components/Loader";
+import Loader from "../components/Helper/Loader";
 import MovieCard from "../components/MovieCard/MovieCard";
 
 const MovieContainer = styled.div`
   display: flex;
   flex-flow: row wrap;
   margin: 1vw 1vw;
+
+  @media screen and (max-width: 3000px) {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 2000px) {
+    justify-content: center;
+  }
 `;
 
 const PageText = styled.h1`
@@ -18,13 +26,14 @@ const PageText = styled.h1`
   color: #7ca579;
 `;
 
-const PopularMovies = props => {
+const PopularMovies = () => {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 
   const [{ data, isLoading, isError }] = useAxiosHook(url);
-
-  const { handleMovieClick } = props;
+  const differentType = data.map(movie => (
+    <MovieCard key={movie.id.toString()} movie={movie}></MovieCard>
+  ));
 
   return (
     <>
@@ -35,15 +44,10 @@ const PopularMovies = props => {
         <Loader />
       ) : (
         <MovieContainer>
-          {data.map(movie => {
-            return (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                handleMovieClick={handleMovieClick}
-              />
-            );
-          })}
+          {/* {data.map(movie => (
+            <MovieCard key={movie.id} movie={movie}></MovieCard>
+          ))} */}
+          {differentType}
         </MovieContainer>
       )}
     </>

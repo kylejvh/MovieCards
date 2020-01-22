@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 import Navigation from "../components/Navigation/Navigation";
-import Search from "../components/Search";
-import Loader from "../components/Loader";
+import Searchbar from "../components/Helper/Searchbar";
+import Loader from "../components/Helper/Loader";
 import MovieCard from "../components/MovieCard/MovieCard";
 import useAxiosHook from "../components/DataFetch/useAxiosHook";
-import PageSwitch from "../components/PageSwitch";
+// import PageSwitch from "../components/PageSwitch";
 
 const MovieContainer = styled.div`
   display: flex;
@@ -14,33 +14,30 @@ const MovieContainer = styled.div`
   justify-content: space-around;
   margin: 1vw 1.5vw;
 
-  @media screen and (max-width: 361px) {
+  @media screen and (max-width: 3000px) {
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 2000px) {
+    justify-content: center;
   }
 `;
 
-const Home = props => {
-  const { handleMovieClick } = props;
-
-  const [{ data, isLoading, isError }, doFetch] = useAxiosHook();
+const Search = () => {
+  const [{ data, isLoading }, doFetch] = useAxiosHook();
 
   // defaults = [1124, 335984, 1551398,  ["374720", ]
 
   return (
     <>
       <Navigation />
-      <Search onSubmit={doFetch} />
+      <Searchbar onSubmit={doFetch} />
       {isLoading ? (
         <Loader />
       ) : (
         <MovieContainer>
           {data.map(movie => {
-            return (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                handleMovieClick={handleMovieClick}
-              />
-            );
+            return <MovieCard key={movie.id} movie={movie} />;
           })}
         </MovieContainer>
       )}
@@ -49,4 +46,4 @@ const Home = props => {
   );
 };
 
-export default Home;
+export default Search;

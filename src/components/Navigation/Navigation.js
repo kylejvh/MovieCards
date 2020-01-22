@@ -1,25 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-
-import HeaderLink from "./HeaderLink";
+import NavLink from "./NavLink";
+import { useMediaQuery } from "react-responsive";
 
 const StyledNavbar = styled.div`
   display: flex;
-  margin: 1em;
+  flex-flow: row nowrap;
+  margin: 1rem;
+
+  @media screen and (min-width: 1824px) {
+    font-size: 24px;
+  }
+
+  @media screen and (max-width: 700px) {
+    font-size: 16px;
+    justify-content: center;
+  }
 
   @media screen and (max-width: 480px) {
-    font-size: 0.5em;
+    font-size: 14px;
+    justify-content: center;
+  }
+
+  @media screen and (max-width: 380px) {
+    font-size: 12px;
+    justify-content: center;
   }
 `;
 
 const Navigation = props => {
+  const isMobile = useMediaQuery({
+    query: "(max-width: 600px)"
+  });
   return (
     <StyledNavbar>
-      <HeaderLink to="/" buttonTitle="Search" />
-      <HeaderLink to="/upcoming" buttonTitle="Upcoming Movies" />
-      <HeaderLink to="/popular" buttonTitle="Popular Movies" />
-      <HeaderLink to="/favorites" buttonTitle="My Favorites" />
-      {/* <HeaderLink to="/byactor" buttonTitle="Discover by Actor" /> */}
+      <NavLink to="/">{isMobile ? "Popular" : "Popular Movies"}</NavLink>
+      <NavLink to="/upcoming">
+        {isMobile ? "Upcoming" : "Upcoming Movies"}
+      </NavLink>
+      <NavLink to="/search">Search</NavLink>
+      <NavLink to="/favorites">Favorites</NavLink>
+      {/* <NavLink to="/byactor" buttonTitle="Discover by Actor" </NavLink> */}
     </StyledNavbar>
   );
 };

@@ -1,116 +1,57 @@
 import { hot } from "react-hot-loader/root";
-import React, { useState } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Router } from "@reach/router";
+import React from "react";
+
+//import { Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 
-import Home from "../pages/Home";
+import { normalize } from "styled-normalize";
+
+import Store from "./Store/Store";
+import Search from "../pages/Search";
 import FullMoviePage from "../pages/FullMoviePage";
 import PopularMovies from "../pages/PopularMovies";
 import UpcomingMovies from "../pages/UpcomingMovies";
-import DiscoverByActor from "../pages/DiscoverByActor";
 import Favorites from "../pages/Favorites";
+// import DiscoverByActor from "../pages/DiscoverByActor";
 
-import "../style.css";
+export const GlobalStyle = createGlobalStyle`
+  ${normalize}
 
-const GlobalStyle = createGlobalStyle`
-    @import url("https://fonts.googleapis.com/css?family=Titillium+Web:600i&display=swap");
-    font-family: "Titillium Web";
+  html {
+    @import url("https://fonts.googleapis.com/css?family=Titillium+Web:400, 600i&display=swap");
+    @import url("https://fonts.googleapis.com/css?family=Nunito&display=swap");
+    /* font-family: "Nunito", sans-serif; */
+    background-color: #2c3949;
+  font-family: "Titillium Web";  
+  }
+
+  body {
+    /* padding: 0;
+    background-color: black; */
+  }
 `;
 
-// const initialState = {
-//   pageData: {
-//     currentPage: 1,
-//     totalPages: null
-//   }
-// };
-
 const App = () => {
-  const history = useHistory();
-  const [clickedMovieState, setClickedMovieState] = useState({
-    movie: []
-  });
-
-  const [favoritesData, setFavoritesData] = useState({
-    list: [],
-    checkedForDeletion: {
-      deleteList: [],
-      isChecked: false
-    }
-  });
-
-  const handleMovieClick = movie => {
-    setClickedMovieState({
-      movie
-    });
-    history.push("/moviepage");
-  };
-
-  const onAddFavorite = data => {
-    setFavoritesData(prevState => {
-      return { list: [...prevState.list, data] };
-    });
-  };
-
-  const addToDeleteList = id => {
-    console.log("you checked it");
-    setFavoritesData(prevState => {
-      return {
-        checkedForDeletion: {
-          deleteList: [...prevState.checkedForDeletion.deleteList, id],
-          isChecked: !prevState.checkedForDeletion.isChecked
-        }
-      };
-    });
-  };
-
-  const removeFromFavorites = () => {
-    // compare id's on checkedfordeletion to list, and if a match, remove all matched!
-    return;
-  };
-
   return (
-    <>
+    <Store>
       <GlobalStyle />
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => <Home handleMovieClick={handleMovieClick} />}
-        />
-        <Route
-          path="/moviepage"
-          render={() => (
-            <FullMoviePage
-              clickedMovieState={clickedMovieState}
-              onAddFavorite={onAddFavorite}
-            />
-          )}
-        />
-        <Route
-          path="/byactor"
-          render={() => <DiscoverByActor handleMovieClick={handleMovieClick} />}
-        />
-        <Route
-          path="/favorites"
-          render={() => (
-            <Favorites
-              handleMovieClick={handleMovieClick}
-              favoritesData={favoritesData}
-              addToDeleteList={addToDeleteList}
-              isChecked={favoritesData.checkedForDeletion.isChecked}
-            />
-          )}
-        />
-        <Route
-          path="/popular"
-          render={() => <PopularMovies handleMovieClick={handleMovieClick} />}
-        />
-        <Route
-          path="/upcoming"
-          render={() => <UpcomingMovies handleMovieClick={handleMovieClick} />}
-        />
-      </Switch>
-    </>
+      <Router>
+        <PopularMovies path="/" />
+        <UpcomingMovies path="/upcoming" />
+        <Search path="/search" />
+        <Favorites path="/favorites" />
+        <FullMoviePage path="fullmoviepage" />
+      </Router>
+      {/* <Switch>
+        <Route exact path="/" component={PopularMovies}></Route>
+        <Route path="/upcoming" render={() => <UpcomingMovies />} />
+        <Route path="/search" render={() => <Search />} />
+        <Route path="/favorites" component={Favorites}></Route>
+        <Route path="/moviepage" render={() => <FullMoviePage />} />
+       <Route path="/byactor" render={() => <DiscoverByActor />} /> 
+      </Switch> */}
+    </Store>
   );
 };
 
