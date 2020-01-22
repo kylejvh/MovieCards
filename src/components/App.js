@@ -14,7 +14,7 @@ import UpcomingMovies from "../pages/UpcomingMovies";
 import Favorites from "../pages/Favorites";
 // import DiscoverByActor from "../pages/DiscoverByActor";
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   ${normalize}
 
   html {
@@ -23,11 +23,6 @@ export const GlobalStyle = createGlobalStyle`
     /* font-family: "Nunito", sans-serif; */
     background-color: #2c3949;
   font-family: "Titillium Web";  
-  }
-
-  body {
-    /* padding: 0;
-    background-color: black; */
   }
 `;
 
