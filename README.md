@@ -1,4 +1,4 @@
-# React-MovieCards
+# MovieCards
 
 ## **<a href="https://kylejvh.github.io/React-MovieCards/" target="_blank">Click here to demo</a>**
 
