@@ -349,14 +349,17 @@ const FullMoviePage = () => {
                 {movie.details.runtime !== 0 && (
                   <>
                     <RuntimeIcon />
-                    {convertedRuntime} &middot;
+                    {convertedRuntime}
                   </>
                 )}
                 {movie.details.vote_average !== 0 && (
-                  <Text style={{ color: "gold" }}>
-                    <RatingIcon />
-                    {movie.details.vote_average}
-                  </Text>
+                  <>
+                    &middot;
+                    <Text style={{ color: "gold" }}>
+                      <RatingIcon />
+                      {movie.details.vote_average}
+                    </Text>
+                  </>
                 )}
               </div>
             </Text>
@@ -444,10 +447,12 @@ const FullMoviePage = () => {
               <SubTextContainer>
                 {convertedReleaseDate.format("YYYY")} &middot;
                 {movie.details.runtime !== 0 && (
-                  <RuntimeContainer>
-                    <RuntimeIcon />
-                    {convertedRuntime} &middot;
-                  </RuntimeContainer>
+                  <>
+                    <RuntimeContainer>
+                      <RuntimeIcon />
+                      {convertedRuntime} &middot;
+                    </RuntimeContainer>
+                  </>
                 )}
                 {movie.details.vote_average !== 0 && (
                   <RatingContainer>
@@ -460,14 +465,23 @@ const FullMoviePage = () => {
                 <MobilePlot>{movie.overview}</MobilePlot>
                 {isLargeTablet && (
                   <TabletContainer>
-                    <TabletText>
-                      Budget: $
-                      {parseFloat(movie.details.budget).toLocaleString("en")}
-                    </TabletText>
-                    <TabletText>
-                      Revenue: $
-                      {parseFloat(movie.details.revenue).toLocaleString("en")}
-                    </TabletText>
+                    {movie.details.budget === 0 ? (
+                      <TabletText>Budget: Not Available</TabletText>
+                    ) : (
+                      <TabletText>
+                        Budget: $
+                        {parseFloat(movie.details.budget).toLocaleString("en")}
+                      </TabletText>
+                    )}
+
+                    {movie.details.revenue === 0 ? (
+                      <TabletText>Revenue: Not Available</TabletText>
+                    ) : (
+                      <TabletText>
+                        Revenue: $
+                        {parseFloat(movie.details.revenue).toLocaleString("en")}
+                      </TabletText>
+                    )}
                   </TabletContainer>
                 )}
               </SideContainer>
