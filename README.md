@@ -1,6 +1,6 @@
 # React-MovieCards
 
-## **<a href="https://kylejvh.github.io/React-MovieCards/" target="_blank">Click here to demo</a>**
+## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
 
 > This project represents my first journey
 > into creating a fully fleshed out and continuously
