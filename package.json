@@ -1,11 +1,9 @@
 {
   "name": "moviecards",
-  "homepage": "https://kylejvh.github.io/React-MovieCards",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "npm": "6.9.0",
-    "node": "10.16.3"
+    "node": "13.6.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
@@ -20,7 +18,6 @@
     "react-app-rewire-hot-loader": "^2.0.1",
     "react-dom": "^16.10.2",
     "react-hot-loader": "^4.12.15",
-    "react-player": "^1.14.2",
     "react-responsive": "^8.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.2.0",
