@@ -1,4 +1,4 @@
-# React-MovieCards
+# MovieCards
 
 ## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
 
@@ -35,7 +35,7 @@ Quickly access relevent information like runtimes, ratings, release dates, and t
 - kylejvh@gmail.com
 
 > My portfolio: 
-- https://kylejvh.github.io/kjvh
+- <a href="https://www.kylejvh.com/" target="_blank">kylejvh.com</a>
 
 ---
 
