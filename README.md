@@ -2,7 +2,7 @@
 
 ## **<a href="https://kylejvh.github.io/React-MovieCards/" target="_blank">Click here to demo</a>**
 
-> This practice project represents my first foray
+> This project represents my first journey
 > into creating a fully fleshed out and continuously
 > developed React App.
 
@@ -29,12 +29,13 @@ Quickly access relevent information like runtimes, ratings, release dates, and t
 
 ---
 
-## Support
+## Contact
 
-Reach out to me at one of the following places!
+> Reach out to me at: 
+- kylejvh@gmail.com
 
-- Website at --/
-- Insert contact email here.
+> My portfolio: 
+- https://kylejvh.github.io/kjvh
 
 ---
 
