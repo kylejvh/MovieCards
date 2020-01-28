@@ -419,7 +419,7 @@ const FullMoviePage = () => {
             Back
           </DesktopBackButton>
           <LeftContainer>
-            <Poster src={posterURL + movie.poster_path}></Poster>
+            <Poster src={mobilePosterURL + movie.poster_path}></Poster>
             {movie.details.tagline && (
               <TaglineText>"{movie.details.tagline}"</TaglineText>
             )}
