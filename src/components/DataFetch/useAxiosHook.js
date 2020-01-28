@@ -25,7 +25,7 @@ const useAxiosHook = myUrl => {
         await Promise.all(
           response.data.results.map(async movie => {
             const responseDetails = await axios.get(
-              `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&append_to_response=videos&language=en-US`
+              `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${API_KEY}&&language=en-US&append_to_response=videos,images&include_image_language=en,null`
             );
             movie.details = responseDetails.data;
           })

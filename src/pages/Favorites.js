@@ -22,6 +22,10 @@ const PageText = styled.h1`
   font-size: 1.5em;
   margin: 1.5em 1em 0 1em;
   color: #7ca579;
+
+  @media screen and (min-width: 1824px) {
+    margin-left: 5em;
+  }
 `;
 
 const RemoveModeButton = styled.button`

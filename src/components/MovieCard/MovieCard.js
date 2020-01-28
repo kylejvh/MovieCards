@@ -17,7 +17,6 @@ const CardContainer = styled.div`
   flex: 0 0 9%;
   display: flex;
   justify-content: space-around;
-
   margin: 1.55vw 1vw;
   border-radius: 10px 10px 0 0;
   transition: transform;

@@ -22,8 +22,12 @@ const MovieContainer = styled.div`
 
 const PageText = styled.h1`
   font-size: 1.5em;
-  margin: 1.5em 1em 0 1em;
+  margin: 1.5em 1em 0.75em 1em;
   color: #7ca579;
+
+  @media screen and (min-width: 1824px) {
+    margin-left: 5em;
+  }
 `;
 
 const PopularMovies = () => {
@@ -31,7 +35,7 @@ const PopularMovies = () => {
   const url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 
   const [{ data, isLoading, isError }] = useAxiosHook(url);
-  const differentType = data.map(movie => (
+  const moviecards = data.map(movie => (
     <MovieCard key={movie.id.toString()} movie={movie}></MovieCard>
   ));
 
@@ -47,7 +51,7 @@ const PopularMovies = () => {
           {/* {data.map(movie => (
             <MovieCard key={movie.id} movie={movie}></MovieCard>
           ))} */}
-          {differentType}
+          {moviecards}
         </MovieContainer>
       )}
     </>

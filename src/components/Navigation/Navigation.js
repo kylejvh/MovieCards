@@ -6,14 +6,15 @@ import { useMediaQuery } from "react-responsive";
 const StyledNavbar = styled.div`
   display: flex;
   flex-flow: row nowrap;
-  margin: 1rem;
+  margin: 0 1em 1em 1em;
 
   @media screen and (min-width: 1824px) {
     font-size: 24px;
+    margin-left: 3.5em;
   }
 
   @media screen and (max-width: 700px) {
-    font-size: 16px;
+    font-size: 18px;
     justify-content: center;
   }
 

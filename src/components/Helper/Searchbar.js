@@ -10,21 +10,27 @@ const StyledForm = styled.form`
 
 const StyledInput = styled.input`
   height: 2rem;
-  width: 100px;
+  width: 4em;
   transition: all 0.4s ease-in-out;
   background: #151c24;
-  font-size: 20px;
+  font-size: 1em;
   padding: 0.5rem 1rem 0.5rem 1rem;
   border: 2px solid black;
   border-radius: 40px;
   outline: none;
   color: white;
   font-family: inherit;
-  margin: 0;
+  margin-top: 0.5em;
+  margin-left: 1em;
 
   :focus {
     width: 200px;
     border-color: #2769b4;
+  }
+
+  @media screen and (min-width: 1824px) {
+    margin-left: 5em;
+    width: 6em;
   }
 `;
 

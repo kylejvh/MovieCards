@@ -146,7 +146,7 @@ const ButtonContainer = styled.div`
 
 const BackButton = styled.button`
   margin: 0.5rem;
-  padding: 0;
+  padding: 0.1em;
   border: none;
   outline: none;
   border-radius: 0.5rem;
@@ -181,7 +181,13 @@ const BackIcon = styled(ChevronLeft)`
 //! Desktop Styled Components
 
 const MasterContainer = styled.div`
-  background: linear-gradient(360deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)),
+  background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.97) 10%,
+      rgba(0, 0, 0, 0.92) 20%,
+      rgba(0, 0, 0, 0.92) 80%,
+      rgba(0, 0, 0, 0.97) 100%
+    ),
     no-repeat center center url(${props => props.posterPath});
   background-size: cover;
   height: 100vh;
@@ -190,10 +196,27 @@ const MasterContainer = styled.div`
   color: white;
   display: flex;
   background-color: #2c3949;
+  align-items: center;
+
+  @media screen and (min-width: 1025px) {
+    font-size: 16px;
+  }
 
   @media screen and (min-width: 1824px) {
-    font-size: 23px;
+    font-size: 22px;
   }
+
+  @media screen and (min-width: 2400px) {
+    font-size: 30px;
+  }
+
+  @media screen and (min-width: 3000px) {
+    font-size: 45px;
+  }
+`;
+
+const DesktopBackButton = styled(BackButton)`
+  padding: 0.2em 0.5em 0.2em 0;
 `;
 
 const LeftContainer = styled.div`
@@ -202,28 +225,39 @@ const LeftContainer = styled.div`
   /* background: linear-gradient(360deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)); */
   align-items: center;
   text-align: center;
-  background: linear-gradient(
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+  /* background: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.9) 0%,
     rgba(0, 0, 0, 0.5) 80%,
     rgba(0, 0, 0, 0.2) 90%,
     rgba(0, 0, 0, 0) 100%
-  );
-  margin: 2.4rem 2.5rem 0 2.5rem;
+  ); */
+  /* margin: 3em 2.5em 0 2.5em; */
+  padding: 0 2.5em 0 2.5em;
+`;
+
+const Poster = styled.img`
+  width: 18em;
+  max-width: 100%;
+  height: auto;
+  /* box-shadow: 10px 10px 38px 19px rgba(255, 255, 255, 0.1);
+  filter: blur(0.0001em); */
+  margin: 3em 0 1em 0;
 `;
 
 const LeftButtons = styled(ButtonContainer)`
-  margin: 1rem 0 0 0;
+  margin: 1em 0 0 0;
   flex-flow: column;
 `;
 
 const CenterContainer = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 1;
-  width: 40rem;
-  height: 65%;
-  background: rgba(0, 0, 0, 0.93);
+  flex: 2;
+  /* background: rgba(0, 0, 0, 0.93); */
 
   /* linear-gradient(
      0%,
@@ -231,9 +265,9 @@ const CenterContainer = styled.div`
     rgba(0, 0, 0, 0.2) 90%,
     rgba(0, 0, 0, 0) 100%
   ); */
-  box-shadow: 0 0 5px 15px rgba(0, 0, 0, 0.93);
+  /* box-shadow: 0 0 5px 15px rgba(0, 0, 0, 0.93); */
 
-  margin: 3rem 3rem 0 0;
+  margin: 1em 3em;
 `;
 
 // const CastContainer = styled.div`
@@ -243,58 +277,115 @@ const CenterContainer = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   height: 100%;
+`;
+
+const ScreenshotContainer = styled.div`
+  display: flex;
+  flex-flow: column;
+  align-items: flex-end;
+  flex: 1;
+  height: 100%;
+
+  /* background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 80%,
+    rgba(0, 0, 0, 0.2) 90%,
+    rgba(0, 0, 0, 0) 100%
+  ); */
+`;
+
+const ScreenshotGradient = styled.div`
+  height: auto;
+  max-height: 25%;
+  flex: 1;
+  width: 100%;
+  background: no-repeat center/contain url(${props => props.screenshotPath});
+  margin: 1em;
+  /* box-shadow: 0 0.1em 0.1em rgba(0, 0, 0, 0.034),
+    0 0.12em 0.22em rgba(0, 0, 0, 0.048), 0 0.5em 0.4em rgba(0, 0, 0, 0.06),
+    0 1em 0.75em rgba(0, 0, 0, 0.072), 0 0.5em 0.35em rgba(0, 0, 0, 0.086),
+    0 2.5em 2em rgba(0, 0, 0, 0.12); */
+
+  border-radius: 5px;
+  /* box-shadow: 10px 38px 19px rgba(255, 255, 255, 0.1); */
+  /* filter: blur(0.0001em); */
+  /* transition: all 300ms ease;
+  &:hover {
+    transform: scale(1.05);
+  } */
+  /* Write up animations with props to have each image ease in, one after the other. */
 `;
 
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 3em 2.5em 0 0;
+`;
+
+const Header = styled.div`
+  margin-bottom: 1em;
+
+  h1 {
+    font-family: "Titillium Web", sans-serif;
+    font-size: 3.5em;
+    text-shadow: -1px -1px 1px #aaa, 0px 4px 1px rgba(0, 0, 0, 0.5),
+      4px 4px 5px rgba(0, 0, 0, 0.7), 0px 0px 7px rgba(0, 0, 0, 0.4);
+    margin: 0 0 0.25em 0;
+    padding: 0;
+  }
+
+  h2 {
+    font-size: 1.25em;
+    margin: 0.1em 0;
+  }
 `;
 
 const MovieTitle = styled.h1`
   font-family: "Titillium Web", sans-serif;
-  font-size: 3rem;
+  font-size: 3.5em;
   text-shadow: -1px -1px 1px #aaa, 0px 4px 1px rgba(0, 0, 0, 0.5),
     4px 4px 5px rgba(0, 0, 0, 0.7), 0px 0px 7px rgba(0, 0, 0, 0.4);
-  margin: 0;
+  margin: 0.15em 0;
   padding: 0;
 `;
 
 const DetailTitle = styled(MovieTitle)`
-  font-size: 1rem;
+  font-size: 1em;
   font-weight: 600;
   text-align: center;
 `;
 
-const Poster = styled.img`
-  width: 15em;
-  box-shadow: 10px 10px 38px 19px rgba(255, 255, 255, 0.1);
-  filter: blur(0.0001em);
-`;
-
 const Text = styled.p`
-  font-size: 1rem;
-  margin: 0 0 1rem 0;
+  font-size: 1em;
+  margin: 0 0 0.1em 0;
 `;
 
-const MoviePlot = styled(Text)`
-  margin: 2em 0 0 0;
-  font-size: 0.75em;
-  width: 70%;
+const MoviePlot = styled.div`
+  width: 80%;
+  margin: 3em 0 0 0;
+
+  h1 {
+    font-size: 1.25em;
+    margin: 0.1em 0;
+  }
+
+  p {
+    font-size: 1em;
+  }
 `;
 
 const TaglineText = styled.h3`
-  font: italic 600 1em "Titillium Web", sans-serif;
+  font: italic 600 1.25em "Titillium Web", sans-serif;
   margin-top: 0.25em;
-  width: 14em;
+  max-width: 90%;
 `;
 
 const FullMoviePage = () => {
   const { state } = useContext(CTX);
   const { clickedMovie: movie } = state;
-  const posterURL = "https://image.tmdb.org/t/p/original/";
+  const posterURL = "https://image.tmdb.org/t/p/original";
 
   let genresArray = movie.details.genres.map(item => item.name);
   const convertRuntime = num => {
@@ -320,6 +411,10 @@ const FullMoviePage = () => {
     <>
       {isDesktopOrLaptop && (
         <MasterContainer posterPath={posterURL + movie.backdrop_path}>
+          <DesktopBackButton onClick={() => navigate("../")}>
+            <BackIcon />
+            Back
+          </DesktopBackButton>
           <LeftContainer>
             <Poster src={posterURL + movie.poster_path}></Poster>
             {movie.details.tagline && (
@@ -336,34 +431,32 @@ const FullMoviePage = () => {
             </LeftButtons>
           </LeftContainer>
           <CenterContainer>
-            <MovieTitle>{movie.title}</MovieTitle>
-            <Text>
-              {movie.details.genres
-                .map(item => {
-                  let arr = [];
-                  arr.push(item.name);
-                  return arr;
-                })
-                .join(", ")}
+            <Header>
+              <h1>{movie.title}</h1>
+              <h2>{genresArray.join(", ")}</h2>
               <div style={{ display: "flex" }}>
                 {movie.details.runtime !== 0 && (
                   <>
-                    <RuntimeIcon />
-                    {convertedRuntime}
+                    <h2>
+                      <RuntimeIcon />
+                      {convertedRuntime}
+                    </h2>
                   </>
                 )}
                 {movie.details.vote_average !== 0 && (
                   <>
-                    &middot;
-                    <Text style={{ color: "gold" }}>
+                    <h2 style={{ color: "gold", marginLeft: ".5em" }}>
                       <RatingIcon />
                       {movie.details.vote_average}
-                    </Text>
+                    </h2>
                   </>
                 )}
               </div>
-            </Text>
-            <MoviePlot>{movie.overview}</MoviePlot>
+            </Header>
+            <MoviePlot>
+              <h1>Overview</h1>
+              <p>{movie.overview}</p>
+            </MoviePlot>
             {/* <CastContainer>
           <Cast style={{ flexDirection: "row" }} cast={creditsData.cast} /> 
           <ExpandButton
@@ -420,6 +513,14 @@ const FullMoviePage = () => {
               </DetailContainer>
             </BottomContainer>
           </CenterContainer>
+          <ScreenshotContainer>
+            {movie.details.images.backdrops.slice(4, 8).map((image, i) => (
+              <ScreenshotGradient
+                key={i}
+                screenshotPath={posterURL + image.file_path}
+              ></ScreenshotGradient>
+            ))}
+          </ScreenshotContainer>
         </MasterContainer>
       )}
 
