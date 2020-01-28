@@ -385,7 +385,10 @@ const TaglineText = styled.h3`
 const FullMoviePage = () => {
   const { state } = useContext(CTX);
   const { clickedMovie: movie } = state;
+
   const posterURL = "https://image.tmdb.org/t/p/original";
+  const mobilePosterURL = "https://image.tmdb.org/t/p/w780";
+  const screenShotURL = "https://image.tmdb.org/t/p/w1280";
 
   let genresArray = movie.details.genres.map(item => item.name);
   const convertRuntime = num => {
@@ -517,7 +520,7 @@ const FullMoviePage = () => {
             {movie.details.images.backdrops.slice(4, 8).map((image, i) => (
               <ScreenshotGradient
                 key={i}
-                screenshotPath={posterURL + image.file_path}
+                screenshotPath={screenShotURL + image.file_path}
               ></ScreenshotGradient>
             ))}
           </ScreenshotContainer>
@@ -526,7 +529,7 @@ const FullMoviePage = () => {
 
       {isMobileorTablet && (
         <>
-          <MobileContainer posterPath={posterURL + movie.poster_path}>
+          <MobileContainer posterPath={mobilePosterURL + movie.poster_path}>
             <BackButton onClick={() => navigate("../")}>
               <BackIcon />
             </BackButton>
