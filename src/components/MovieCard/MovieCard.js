@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
+
+import { connect } from "react-redux";
+import { useRouteMatch } from "react-router-dom";
+import { handleMovieClick, removeFavorite } from "../../actions";
 
 import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-import { navigate } from "@reach/router";
-
-import { CTX } from "../Store/Store";
 
 import AltPoster from "./posterplaceholder.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -90,18 +91,18 @@ const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
 `;
 
 const MovieCard = props => {
-  const { dispatch } = useContext(CTX);
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
-  const { poster_path, title, vote_average } = props.movie;
-  const { runtime } = props.movie.details;
+  const { poster_path, title, vote_average, id } = props.movie;
+
+  let runtime;
+  if (props.movie.details) {
+    runtime = props.movie.details.runtime;
+  } else {
+    runtime = props.movie.runtime;
+  }
 
   const imageURL = `https://image.tmdb.org/t/p/w780${poster_path}`;
-
-  function handleMovieClick() {
-    dispatch({ type: "MOVIE_CLICKED", payload: props.movie });
-    navigate(`/fullmoviepage/`, { myMovie: props.movie });
-  }
 
   const convertRuntime = num => {
     let hours = num / 60;
@@ -113,40 +114,42 @@ const MovieCard = props => {
 
   const convertedRuntime = convertRuntime(runtime);
 
-  const showRuntime = () => {
-    if (!isMobile && runtime !== 0) {
-      return (
-        <StyledRuntime>
-          <RuntimeIcon />
-          {convertedRuntime}
-        </StyledRuntime>
-      );
-    }
-  };
+  let renderRuntime;
+  if (!isMobile && runtime !== 0) {
+    renderRuntime = (
+      <StyledRuntime>
+        <RuntimeIcon />
+        {convertedRuntime}
+      </StyledRuntime>
+    );
+  }
 
-  const showRating = () => {
-    if (!isMobile && vote_average !== 0) {
-      return (
-        <StyledRating>
-          <RatingIcon />
-          {vote_average}
-        </StyledRating>
-      );
-    }
-  };
+  let renderRating;
+  if (!isMobile && vote_average !== 0) {
+    renderRating = (
+      <StyledRating>
+        <RatingIcon />
+        {vote_average}
+      </StyledRating>
+    );
+  }
 
   return (
     <CardContainer>
       <StyledImg
         src={poster_path ? imageURL : AltPoster}
-        onClick={handleMovieClick}
+        onClick={() => props.handleMovieClick(id)}
         alt={`${title} poster`}
       />
-      {showRuntime()}
-      {showRating()}
-      {props.removeMode && <RemoveFavoriteButton movie={props.movie} />}
+      {renderRuntime}
+      {renderRating}
+      {props.removeMode && (
+        <RemoveFavoriteButton
+          onClick={() => props.removeFavorite(props.movie)}
+        />
+      )}
     </CardContainer>
   );
 };
 
-export default MovieCard;
+export default connect(null, { handleMovieClick, removeFavorite })(MovieCard);

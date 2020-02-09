@@ -35,8 +35,7 @@ const PlayIcon = styled(Play)`
 `;
 
 // TMDB API returns a section of YouTube URL to specify the trailer for the respective movie.
-const Trailer = props => {
-  const { urlKey } = props;
+const Trailer = ({ urlKey }) => {
   const url = `https://www.youtube.com/watch?v=${urlKey}`;
 
   return (

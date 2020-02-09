@@ -1,16 +1,18 @@
 import { hot } from "react-hot-loader/root";
-import { Router } from "@reach/router";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import history from "./history";
 import React from "react";
 
 //import { Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-
 import { normalize } from "styled-normalize";
 
-import Store from "./Store/Store";
+import Navigation from "../components/Navigation/Navigation";
 import Search from "../pages/Search";
-import FullMoviePage from "../pages/FullMoviePage";
 import PopularMovies from "../pages/PopularMovies";
+
+import NewMoviePage from "../pages/NewMoviePage";
+
 import UpcomingMovies from "../pages/UpcomingMovies";
 import Favorites from "../pages/Favorites";
 // import DiscoverByActor from "../pages/DiscoverByActor";
@@ -34,15 +36,27 @@ export const GlobalStyle = createGlobalStyle`
 
 const App = () => {
   return (
-    <Store>
+    <>
       <GlobalStyle />
       <Router>
-        <PopularMovies path="/" />
-        <UpcomingMovies path="/upcoming" />
-        <Search path="/search" />
-        <Favorites path="/favorites" />
-        <FullMoviePage path="fullmoviepage" />
+        <Route
+          exact
+          path={["/", "/upcoming", "/search", "/favorites"]}
+          component={Navigation}
+        />
+        <Switch>
+          <Route exact path="/" component={PopularMovies} />
+          <Route path="/upcoming" component={UpcomingMovies} />
+          <Route path="/search" component={Search} />
+          <Route path="/favorites" component={Favorites} />
+          <Route
+            path={["/:id", "/upcoming/:id", "/search/:id", "/favorites/:id"]}
+            component={NewMoviePage}
+          />
+        </Switch>
+        {/* <NotFound default /> */}
       </Router>
+<<<<<<< Updated upstream
       {/* <Switch>
         <Route exact path="/" component={PopularMovies}></Route>
         <Route path="/upcoming" render={() => <UpcomingMovies />} />
@@ -52,6 +66,9 @@ const App = () => {
        <Route path="/byactor" render={() => <DiscoverByActor />} /> 
       </Switch> */}
     </Store>
+=======
+    </>
+>>>>>>> Stashed changes
   );
 };
 

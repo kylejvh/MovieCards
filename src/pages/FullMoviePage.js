@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { navigate } from "@reach/router";
+import axios from "axios";
+import { connect } from "react-redux";
+import { fetchMovie } from "../actions";
 
 import "typeface-roboto";
 import Chip from "@material-ui/core/Chip";
-
 import { ChevronLeft } from "styled-icons/material/ChevronLeft";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
@@ -12,11 +13,15 @@ import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 import { useMediaQuery } from "react-responsive";
 import moment from "moment";
 
+import { Link, useParams } from "react-router-dom";
+
 import Trailer from "../components/Helper/Trailer";
+import Loader from "../components/Helper/Loader";
 import AddFavoriteButton from "../components/Helper/AddFavoriteButton";
 import { CTX } from "../components/Store/Store";
 
-// import Cast from "../components/Cast";
+import useMovieData from "../components/DataFetch/useMovieData";
+
 // import ExpandButton from "../components/ExpandButton";
 
 //! Mobile Styled Components
@@ -144,7 +149,7 @@ const ButtonContainer = styled.div`
   justify-content: space-around;
 `;
 
-const BackButton = styled.button`
+const BackButton = styled(Link)`
   margin: 0.5rem;
   padding: 0;
   border: none;
@@ -243,8 +248,11 @@ const CenterContainer = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
+<<<<<<< Updated upstream
   justify-content: space-between;
   align-items: flex-end;
+=======
+>>>>>>> Stashed changes
   height: 100%;
 `;
 
@@ -291,12 +299,26 @@ const TaglineText = styled.h3`
   width: 14em;
 `;
 
+<<<<<<< Updated upstream
 const FullMoviePage = () => {
   const { state } = useContext(CTX);
   const { clickedMovie: movie } = state;
   const posterURL = "https://image.tmdb.org/t/p/original/";
+=======
+const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
+  const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const url = `https://api.themoviedb.org/3/movie/530915?api_key=${API_KEY}&&language=en-US&append_to_response=credits,videos,images&include_image_language=en,null`;
 
-  let genresArray = movie.details.genres.map(item => item.name);
+  useEffect(() => {
+    fetchMovie(url);
+  }, []);
+
+  const posterURL = "https://image.tmdb.org/t/p/original";
+  const mobilePosterURL = "https://image.tmdb.org/t/p/w780";
+>>>>>>> Stashed changes
+
+  // let genresArray = movie.genres ? movie.genres.map(item => item.name) : [];
+
   const convertRuntime = num => {
     let hours = num / 60;
     let rhours = Math.floor(hours);
@@ -305,8 +327,9 @@ const FullMoviePage = () => {
     return rhours + "h " + rminutes + "m";
   };
 
-  const convertedRuntime = convertRuntime(movie.details.runtime);
-  const convertedReleaseDate = moment(movie.release_date, "YYYY-MM-DD");
+  // const convertedRuntime = movie.runtime ? convertRuntime(movie.runtime) : "";
+
+  // const convertedReleaseDate = moment(movie.release_date, "YYYY-MM-DD");
 
   // Mobile Aware Queries - Used for short-circuit rendering of elements.
   const isMobileorTablet = useMediaQuery({ query: "(max-width: 1024px)" });
@@ -316,26 +339,37 @@ const FullMoviePage = () => {
     query: "(min-width: 1025px)"
   });
 
-  return (
-    <>
-      {isDesktopOrLaptop && (
+  let isError = false;
+  //! Temporary Conditional to stop undefined errors...
+  let conditionalContent;
+  if (isError) {
+    conditionalContent = <div>Error Occurred</div>;
+  } else if (movie !== null) {
+    conditionalContent = (
+      <>
         <MasterContainer posterPath={posterURL + movie.backdrop_path}>
+<<<<<<< Updated upstream
           <LeftContainer>
             <Poster src={posterURL + movie.poster_path}></Poster>
             {movie.details.tagline && (
               <TaglineText>"{movie.details.tagline}"</TaglineText>
             )}
+=======
+          <DesktopBackButton to="../">
+            <BackIcon />
+            Back
+          </DesktopBackButton>
+          <LeftContainer>
+            <Poster src={mobilePosterURL + movie.poster_path}></Poster>
+            {movie.tagline && <TaglineText>"{movie.tagline}"</TaglineText>}
+>>>>>>> Stashed changes
             <LeftButtons>
-              <Trailer
-                urlKey={
-                  movie.details.videos.results &&
-                  movie.details.videos.results[0].key
-                }
-              />
+              <Trailer urlKey={videos.results && videos.results[0].key} />
               <AddFavoriteButton movie={movie} favorites={state.favorites} />
             </LeftButtons>
           </LeftContainer>
           <CenterContainer>
+<<<<<<< Updated upstream
             <MovieTitle>{movie.title}</MovieTitle>
             <Text>
               {movie.details.genres
@@ -345,9 +379,15 @@ const FullMoviePage = () => {
                   return arr;
                 })
                 .join(", ")}
+=======
+            <Header>
+              <h1>{movie.title}</h1>
+              <h2>{movie.genres.join(", ")}</h2>
+>>>>>>> Stashed changes
               <div style={{ display: "flex" }}>
-                {movie.details.runtime !== 0 && (
+                {movie.runtime !== 0 && (
                   <>
+<<<<<<< Updated upstream
                     <RuntimeIcon />
                     {convertedRuntime} &middot;
                   </>
@@ -361,6 +401,29 @@ const FullMoviePage = () => {
               </div>
             </Text>
             <MoviePlot>{movie.overview}</MoviePlot>
+=======
+                    <h2>
+                      <RuntimeIcon />
+                      {movie.runtime}
+                    </h2>
+                  </>
+                )}
+                {movie.vote_average !== 0 && (
+                  <>
+                    <h2 style={{ color: "gold", marginLeft: ".5em" }}>
+                      <RatingIcon />
+                      {movie.vote_average}
+                    </h2>
+                  </>
+                )}
+              </div>
+            </Header>
+            <MoviePlot>
+              <h1>Overview</h1>
+              <p>{movie.overview}</p>
+            </MoviePlot>
+
+>>>>>>> Stashed changes
             {/* <CastContainer>
           <Cast style={{ flexDirection: "row" }} cast={creditsData.cast} /> 
           <ExpandButton
@@ -395,28 +458,30 @@ const FullMoviePage = () => {
               </Text>
             )} 
               </DetailContainer> */}
+
               <DetailContainer>
                 <DetailTitle>Revenue:</DetailTitle>
-                {movie.details.revenue === 0 ? (
+                {movie.revenue === 0 ? (
                   <Text>Not Available</Text>
                 ) : (
-                  <Text> {"$ " + movie.details.revenue.toLocaleString()}</Text>
+                  <Text> {"$ " + movie.revenue.toLocaleString()}</Text>
                 )}
               </DetailContainer>
               <DetailContainer>
                 <DetailTitle>Budget:</DetailTitle>
-                {movie.details.budget === 0 ? (
+                {movie.budget === 0 ? (
                   <Text>Not Available</Text>
                 ) : (
-                  <Text> {"$ " + movie.details.budget.toLocaleString()}</Text>
+                  <Text> {"$ " + movie.budget.toLocaleString()}</Text>
                 )}
               </DetailContainer>
               <DetailContainer>
                 <DetailTitle>Release Date:</DetailTitle>
-                <Text>{convertedReleaseDate.format("LL")}</Text>
+                {/* <Text>{movie.release_date.format("LL")}</Text> */}
               </DetailContainer>
             </BottomContainer>
           </CenterContainer>
+<<<<<<< Updated upstream
         </MasterContainer>
       )}
 
@@ -486,6 +551,27 @@ const FullMoviePage = () => {
       )}
     </>
   );
+=======
+          {/* <ScreenshotContainer>
+            {movie.images.backdrops.slice(4, 8).map((image, i) => (
+              <ScreenshotGradient
+                key={i}
+                screenshotPath={screenShotURL + image.file_path}
+              ></ScreenshotGradient>
+            ))}
+          </ScreenshotContainer> */}
+        </MasterContainer>
+      </>
+    );
+  } else {
+    conditionalContent = <Loader />;
+    console.log(movie, "movie, from reducer");
+    console.log(images, "from reducer");
+    console.log(videos, "from reducer");
+    console.log(credits, "from reducer");
+  }
+  return <>{conditionalContent}</>;
+>>>>>>> Stashed changes
 };
 
 export default FullMoviePage;

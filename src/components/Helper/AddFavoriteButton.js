@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import { Plus } from "styled-icons/fa-solid/Plus";
-import { CTX } from "../Store/Store";
 
 const AddButton = styled.button`
   margin: 0.5rem;
@@ -34,34 +33,9 @@ const PlusIcon = styled(Plus)`
 `;
 
 const AddFavoriteButton = props => {
-  //! Add duplicate error message/feedback.
-  const { dispatch } = useContext(CTX);
-  const { movie, favorites } = props;
-
-  const handleAddFavorite = () => {
-    if (favorites.length === 0) {
-      // If no favorites exist, clone the movie and copy into newArray.
-      let newArray = favorites.slice();
-      let deepClone = JSON.parse(JSON.stringify(movie));
-      newArray = [...newArray, deepClone];
-
-      return dispatch({ type: "ADDED_FAVORITE", payload: newArray });
-    } else if (favorites.length > 0) {
-      let newArray = favorites.slice();
-      if (newArray.find(item => item.id === movie.id)) {
-        return console.log("match found via find");
-      }
-      // If no duplicates exist, add to favorites list.
-
-      let deepClone = JSON.parse(JSON.stringify(movie));
-      newArray = [...newArray, deepClone];
-      return dispatch({ type: "ADDED_FAVORITE", payload: newArray });
-    }
-  };
-
   return (
     <>
-      <AddButton onClick={handleAddFavorite}>
+      <AddButton onClick={props.onClick}>
         <PlusIcon />
         Add to List
       </AddButton>

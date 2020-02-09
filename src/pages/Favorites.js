@@ -1,8 +1,8 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { CTX } from "../components/Store/Store";
-import Navigation from "../components/Navigation/Navigation";
+
 import MovieCard from "../components/MovieCard/MovieCard";
+import { connect } from "react-redux";
 
 const MovieContainer = styled.div`
   display: flex;
@@ -54,14 +54,16 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-const Favorites = () => {
+const Favorites = ({ favorites }) => {
   const [toggleRemove, setToggleRemove] = useState(false);
-  const { state } = useContext(CTX);
-  const { favorites } = state;
+
+  const renderFavorites = favorites.map(movie => (
+    <MovieCard key={movie.id} movie={movie} removeMode={toggleRemove} />
+  ));
 
   return (
     <>
-      <Navigation />
+      {console.log(favorites, "favortires")}
       {favorites.length > 0 ? (
         <>
           <PageText>Your list of favorites!</PageText>
@@ -71,15 +73,7 @@ const Favorites = () => {
             </RemoveModeButton>
           </ButtonContainer>
 
-          <MovieContainer>
-            {favorites.map(movie => (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                removeMode={toggleRemove}
-              />
-            ))}
-          </MovieContainer>
+          <MovieContainer>{renderFavorites}</MovieContainer>
         </>
       ) : (
         <PageText>
@@ -90,4 +84,10 @@ const Favorites = () => {
   );
 };
 
-export default Favorites;
+const mapStateToProps = state => {
+  return {
+    favorites: state.favorites.favorites
+  };
+};
+
+export default connect(mapStateToProps)(Favorites);

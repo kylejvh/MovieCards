@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-import Navigation from "../components/Navigation/Navigation";
 import Searchbar from "../components/Helper/Searchbar";
 import Loader from "../components/Helper/Loader";
 import MovieCard from "../components/MovieCard/MovieCard";
-import useAxiosHook from "../components/DataFetch/useAxiosHook";
+// import useMovieData from "../components/DataFetch/useMovieData";
 // import PageSwitch from "../components/PageSwitch";
 
 const MovieContainer = styled.div`
@@ -23,20 +23,19 @@ const MovieContainer = styled.div`
   }
 `;
 
-const Search = () => {
-  const [{ data, isLoading }, doFetch] = useAxiosHook();
+const Search = ({ movies, isError, isLoading }) => {
+  // const [{ data, isLoading }, doFetch] = useMovieData();
 
   // defaults = [1124, 335984, 1551398,  ["374720", ]
 
   return (
     <>
-      <Navigation />
-      <Searchbar onSubmit={doFetch} />
+      <Searchbar />
       {isLoading ? (
         <Loader />
       ) : (
         <MovieContainer>
-          {data.map(movie => {
+          {movies.map(movie => {
             return <MovieCard key={movie.id} movie={movie} />;
           })}
         </MovieContainer>
@@ -46,4 +45,12 @@ const Search = () => {
   );
 };
 
-export default Search;
+const mapStateToProps = state => {
+  return {
+    movies: state.movies.movies,
+    isError: state.movies.isError,
+    isLoading: state.movies.isLoading
+  };
+};
+
+export default connect(mapStateToProps)(Search);
