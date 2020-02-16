@@ -1,10 +1,11 @@
-import { FETCH_MOVIE } from "../actions/types";
+import { FETCH_MOVIE, MOVIE_CLICKED } from "../actions/types";
 
 const INITIAL_STATE = {
   movie: null,
   credits: null,
   videos: null,
-  images: null
+  images: null,
+  clickedMovieId: ""
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +17,12 @@ export default (state = INITIAL_STATE, action) => {
         credits: { ...action.payload.credits },
         videos: { ...action.payload.videos },
         images: { ...action.payload.images }
+      };
+
+    case MOVIE_CLICKED:
+      return {
+        ...state,
+        clickedMovieId: action.payload
       };
 
     default:

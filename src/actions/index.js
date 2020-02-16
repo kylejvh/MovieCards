@@ -5,9 +5,7 @@ import {
   FETCH_MOVIES_SUCCEEDED,
   ADDED_FAVORITE,
   REMOVED_FAVORITE,
-  REDIRECT_INITIATED,
-  REDIRECT_SUCCEEDED,
-  REDIRECT_FAILED
+  MOVIE_CLICKED
 } from "./types";
 
 import { API_KEY } from "../api/key";
@@ -15,7 +13,12 @@ import history from "../components/history";
 import axios from "axios";
 
 export const handleMovieClick = (id, path) => async dispatch => {
-  dispatch({ type: REDIRECT_INITIATED, payload: id });
+  dispatch({ type: MOVIE_CLICKED, payload: id });
+
+  // No path is needed for root ("/"), so if the param doesn't exist, just use id.
+  let url = path !== "/" ? `${path}/${id}` : `/${id}`;
+  console.log(url, "url to nav to...");
+  history.push(url);
 };
 
 export const fetchMovie = url => async dispatch => {
@@ -38,7 +41,6 @@ export const fetchMovies = url => async dispatch => {
       })
     );
 
-    console.log(response.data.results, "handling fetch of all movies...");
     dispatch({ type: FETCH_MOVIES_SUCCEEDED, payload: response.data.results });
   } catch (error) {
     dispatch({ type: FETCH_MOVIES_FAILED });
@@ -47,11 +49,11 @@ export const fetchMovies = url => async dispatch => {
 };
 
 export const addFavorite = movie => (dispatch, getState) => {
-  const { favorites } = getState().favorites;
-  console.log("add fav trigged.", favorites);
+  const { favoritesList } = getState().favorites;
+  console.log("add fav trigged.", favoritesList);
   console.log(movie, "addedfav movie");
 
-  if (favorites.length === 0) {
+  if (favoritesList.length === 0) {
     // If no favorites exist, clone the movie and copy into newArray.
     console.log("length is zero...");
     let newArray = [];
@@ -59,8 +61,8 @@ export const addFavorite = movie => (dispatch, getState) => {
     newArray = [...newArray, deepClone];
     console.log(newArray, "added fav");
     return dispatch({ type: ADDED_FAVORITE, payload: newArray });
-  } else if (favorites.length > 0) {
-    let newArray = favorites.slice();
+  } else if (favoritesList.length > 0) {
+    let newArray = favoritesList.slice();
 
     if (newArray.find(item => item.id === movie.id)) {
       return console.log("match found via find");
@@ -75,9 +77,9 @@ export const addFavorite = movie => (dispatch, getState) => {
 };
 
 export const removeFavorite = movie => (dispatch, getState) => {
-  const { favorites } = getState().favorites;
+  const { favoritesList } = getState().favorites;
 
-  const newFavorites = favorites.filter(item => item.id !== movie.id);
+  const newFavorites = favoritesList.filter(item => item.id !== movie.id);
 
   dispatch({ type: REMOVED_FAVORITE, payload: newFavorites });
 };

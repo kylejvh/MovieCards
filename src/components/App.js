@@ -1,20 +1,16 @@
 import { hot } from "react-hot-loader/root";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import history from "./history";
 import React from "react";
-
-//import { Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { normalize } from "styled-normalize";
 
 import Navigation from "../components/Navigation/Navigation";
-import Search from "../pages/Search";
 import PopularMovies from "../pages/PopularMovies";
-
-import NewMoviePage from "../pages/NewMoviePage";
-
 import UpcomingMovies from "../pages/UpcomingMovies";
+import Search from "../pages/Search";
 import Favorites from "../pages/Favorites";
+import NewMoviePage from "../pages/NewMoviePage";
 // import DiscoverByActor from "../pages/DiscoverByActor";
 
 export const GlobalStyle = createGlobalStyle`
@@ -38,15 +34,16 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <Router>
-        <Route
+      <Router history={history}>
+        <Navigation />
+        {/* <Route
           exact
           path={["/", "/upcoming", "/search", "/favorites"]}
           component={Navigation}
-        />
+        /> */}
         <Switch>
           <Route exact path="/" component={PopularMovies} />
-          <Route path="/upcoming" component={UpcomingMovies} />
+          <Route exact path="/upcoming" component={UpcomingMovies} />
           <Route path="/search" component={Search} />
           <Route path="/favorites" component={Favorites} />
           <Route
@@ -56,19 +53,7 @@ const App = () => {
         </Switch>
         {/* <NotFound default /> */}
       </Router>
-<<<<<<< Updated upstream
-      {/* <Switch>
-        <Route exact path="/" component={PopularMovies}></Route>
-        <Route path="/upcoming" render={() => <UpcomingMovies />} />
-        <Route path="/search" render={() => <Search />} />
-        <Route path="/favorites" component={Favorites}></Route>
-        <Route path="/moviepage" render={() => <FullMoviePage />} />
-       <Route path="/byactor" render={() => <DiscoverByActor />} /> 
-      </Switch> */}
-    </Store>
-=======
     </>
->>>>>>> Stashed changes
   );
 };
 

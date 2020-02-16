@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { connect } from "react-redux";
-import { addFavorite } from "../../actions";
+import { addFavorite, removeFavorite } from "../../actions";
 
 import Chip from "@material-ui/core/Chip";
 import { ChevronLeft } from "styled-icons/material/ChevronLeft";
@@ -14,6 +14,7 @@ import moment from "moment";
 
 import { Link, useParams } from "react-router-dom";
 
+import Button from "../Helper/Button";
 import Trailer from "../Helper/Trailer";
 import AddFavoriteButton from "../Helper/AddFavoriteButton";
 
@@ -81,9 +82,8 @@ const BackButton = styled(Link)`
 `;
 
 const ButtonContainer = styled.div`
-  margin: 1.25rem 0;
+  margin: 3em 0 0 0;
   display: flex;
-  justify-content: space-around;
 `;
 
 const DesktopBackButton = styled(BackButton)`
@@ -134,7 +134,7 @@ const CenterContainer = styled.div`
   ); */
   /* box-shadow: 0 0 5px 15px rgba(0, 0, 0, 0.93); */
 
-  margin: 1em 3em;
+  margin: 3em 3em;
 `;
 
 // const CastContainer = styled.div`
@@ -219,13 +219,32 @@ const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
 `;
 
 const TaglineText = styled.h3`
-  font: italic 600 1.25em "Titillium Web", sans-serif;
-  margin-top: 0.25em;
-  max-width: 90%;
+  font: italic 600 1.75em "Titillium Web", sans-serif;
+  text-align: center;
+  max-width: 85%;
+  margin: 1em 1em 1em 0;
+
+  :before {
+    color: grey;
+    content: open-quote;
+    font-size: 2em;
+    line-height: 0.1em;
+    margin-right: 0.2em;
+    vertical-align: -0.2em;
+  }
+
+  :after {
+    color: grey;
+    content: close-quote;
+    font-size: 2em;
+    line-height: 0.1em;
+    margin-left: 0.1em;
+    vertical-align: -0.2em;
+  }
 `;
 
 const Details = props => {
-  const { movie, videos, addFavorite } = props;
+  const { movie, videos, favorites, addFavorite, removeFavorite } = props;
 
   let genresArray = movie ? movie.genres.map(item => item.name) : null;
 
@@ -243,77 +262,95 @@ const Details = props => {
     ? moment(movie.release_date, "YYYY-MM-DD")
     : null;
 
+  let isInFavorites = false;
+  if (favorites.find(item => item.id === movie.id)) {
+    isInFavorites = true;
+  }
+
   const posterURL = "https://image.tmdb.org/t/p/original";
   const mobilePosterURL = "https://image.tmdb.org/t/p/w780";
 
   return (
     <>
-      {console.log(videos, "videos")}
+      {console.log(favorites, "videos")}
       {movie ? (
-        <MasterContainer posterPath={posterURL + movie.backdrop_path}>
-          <CenterContainer>
-            <Header>
-              <h1>{movie.title}</h1>
-              <TaglineText>"{movie.tagline}"</TaglineText>
-              <h2>{genresArray.join(", ")}</h2>
-              <div style={{ display: "flex" }}>
-                {movie.runtime !== 0 && (
-                  <>
-                    <h2>
-                      <RuntimeIcon />
-                      {convertedRuntime}
-                    </h2>
-                  </>
-                )}
-                {movie.vote_average !== 0 && (
-                  <>
-                    <h2 style={{ color: "gold", marginLeft: ".5em" }}>
-                      <RatingIcon />
-                      {movie.vote_average}
-                    </h2>
-                  </>
-                )}
-              </div>
-            </Header>
-            <MoviePlot>
-              <h1>Overview</h1>
-              <p>{movie.overview}</p>
-            </MoviePlot>
+        <CenterContainer>
+          <Header>
+            <h1>{movie.title}</h1>
+            <TaglineText>{movie.tagline}</TaglineText>
+            <h2>{genresArray.join(", ")}</h2>
+            <div style={{ display: "flex", marginTop: ".35em" }}>
+              {movie.runtime !== 0 && (
+                <>
+                  <h2>
+                    <RuntimeIcon />
+                    {convertedRuntime}
+                  </h2>
+                </>
+              )}
+              {movie.vote_average !== 0 && (
+                <>
+                  <h2 style={{ color: "gold", marginLeft: ".5em" }}>
+                    <RatingIcon />
+                    {movie.vote_average}
+                  </h2>
+                </>
+              )}
+            </div>
+          </Header>
+          <MoviePlot>
+            <h1>Overview</h1>
+            <p>{movie.overview}</p>
+          </MoviePlot>
 
-            <BottomContainer>
-              <DetailContainer>
-                <DetailTitle>Revenue:</DetailTitle>
-                {movie.revenue === 0 ? (
-                  <Text>Not Available</Text>
-                ) : (
-                  <Text> {"$ " + movie.revenue.toLocaleString()}</Text>
-                )}
-              </DetailContainer>
-              <DetailContainer>
-                <DetailTitle>Budget:</DetailTitle>
-                {movie.budget === 0 ? (
-                  <Text>Not Available</Text>
-                ) : (
-                  <Text> {"$ " + movie.budget.toLocaleString()}</Text>
-                )}
-              </DetailContainer>
-              <DetailContainer>
-                <DetailTitle>Release Date:</DetailTitle>
-                <Text>{convertedReleaseDate.format("LL")}</Text>
-              </DetailContainer>
-            </BottomContainer>
-            {console.log(videos.results)}
-            {videos.results !== [] ? null : (
+          <BottomContainer>
+            <DetailContainer>
+              <DetailTitle>Revenue:</DetailTitle>
+              {movie.revenue === 0 ? (
+                <Text>Not Available</Text>
+              ) : (
+                <Text> {"$ " + movie.revenue.toLocaleString()}</Text>
+              )}
+            </DetailContainer>
+            <DetailContainer>
+              <DetailTitle>Budget:</DetailTitle>
+              {movie.budget === 0 ? (
+                <Text>Not Available</Text>
+              ) : (
+                <Text> {"$ " + movie.budget.toLocaleString()}</Text>
+              )}
+            </DetailContainer>
+            <DetailContainer>
+              <DetailTitle>Release Date:</DetailTitle>
+              <Text>{convertedReleaseDate.format("LL")}</Text>
+            </DetailContainer>
+          </BottomContainer>
+
+          <ButtonContainer>
+            {videos.results === [] ? null : (
               <Trailer urlKey={videos.results[0].key} />
             )}
-
-            {/*! Add ternary to show deletefavorite button if it exists in favorites list. */}
-            <AddFavoriteButton onClick={() => addFavorite(movie)} />
-          </CenterContainer>
-        </MasterContainer>
+            {isInFavorites ? (
+              <Button
+                title={"Remove from List"}
+                onClick={() => removeFavorite(movie)}
+              ></Button>
+            ) : (
+              <AddFavoriteButton onClick={() => addFavorite(movie)} />
+            )}
+          </ButtonContainer>
+        </CenterContainer>
       ) : null}
     </>
   );
 };
 
-export default connect(null, { addFavorite })(Details);
+const mapStateToProps = state => {
+  return {
+    favorites: state.favorites.favoritesList
+  };
+};
+
+export default connect(mapStateToProps, { addFavorite, removeFavorite })(
+  Details
+);

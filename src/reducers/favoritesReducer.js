@@ -4,18 +4,18 @@ import { ADDED_FAVORITE, REMOVED_FAVORITE } from "../actions/types";
 // as well as Show delete button if it exists in favorites...
 
 const INITIAL_STATE = {
-  favorites: []
+  favoritesList: []
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADDED_FAVORITE:
-      return { ...state, favorites: action.payload };
+      return { ...state, favoritesList: action.payload };
 
     case REMOVED_FAVORITE:
       return {
         ...state,
-        favorites: action.payload
+        favoritesList: action.payload
       };
     default:
       return state;

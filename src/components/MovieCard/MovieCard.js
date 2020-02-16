@@ -1,16 +1,13 @@
 import React from "react";
-
 import { connect } from "react-redux";
 import { useRouteMatch } from "react-router-dom";
-import { handleMovieClick, removeFavorite } from "../../actions";
-
-import styled from "styled-components";
 import { useMediaQuery } from "react-responsive";
-
-import AltPoster from "./posterplaceholder.jpg";
+import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
 
+import { handleMovieClick, removeFavorite } from "../../actions";
+import AltPoster from "./posterplaceholder.jpg";
 import RemoveFavoriteButton from "../Helper/RemoveFavoriteButton";
 
 const CardContainer = styled.div`
@@ -91,6 +88,8 @@ const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
 `;
 
 const MovieCard = props => {
+  const { path } = useRouteMatch();
+
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
 
   const { poster_path, title, vote_average, id } = props.movie;
@@ -138,7 +137,7 @@ const MovieCard = props => {
     <CardContainer>
       <StyledImg
         src={poster_path ? imageURL : AltPoster}
-        onClick={() => props.handleMovieClick(id)}
+        onClick={() => props.handleMovieClick(id, path)}
         alt={`${title} poster`}
       />
       {renderRuntime}

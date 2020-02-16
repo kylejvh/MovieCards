@@ -54,8 +54,9 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-const Favorites = ({ favorites }) => {
+const Favorites = props => {
   const [toggleRemove, setToggleRemove] = useState(false);
+  const { favorites } = props;
 
   const renderFavorites = favorites.map(movie => (
     <MovieCard key={movie.id} movie={movie} removeMode={toggleRemove} />
@@ -63,7 +64,7 @@ const Favorites = ({ favorites }) => {
 
   return (
     <>
-      {console.log(favorites, "favortires")}
+      {console.log(favorites.length, "favortires")}
       {favorites.length > 0 ? (
         <>
           <PageText>Your list of favorites!</PageText>
@@ -86,7 +87,7 @@ const Favorites = ({ favorites }) => {
 
 const mapStateToProps = state => {
   return {
-    favorites: state.favorites.favorites
+    favorites: state.favorites.favoritesList
   };
 };
 

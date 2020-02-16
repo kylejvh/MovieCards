@@ -248,11 +248,6 @@ const CenterContainer = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
-<<<<<<< Updated upstream
-  justify-content: space-between;
-  align-items: flex-end;
-=======
->>>>>>> Stashed changes
   height: 100%;
 `;
 
@@ -299,12 +294,6 @@ const TaglineText = styled.h3`
   width: 14em;
 `;
 
-<<<<<<< Updated upstream
-const FullMoviePage = () => {
-  const { state } = useContext(CTX);
-  const { clickedMovie: movie } = state;
-  const posterURL = "https://image.tmdb.org/t/p/original/";
-=======
 const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
   const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const url = `https://api.themoviedb.org/3/movie/530915?api_key=${API_KEY}&&language=en-US&append_to_response=credits,videos,images&include_image_language=en,null`;
@@ -315,7 +304,6 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
 
   const posterURL = "https://image.tmdb.org/t/p/original";
   const mobilePosterURL = "https://image.tmdb.org/t/p/w780";
->>>>>>> Stashed changes
 
   // let genresArray = movie.genres ? movie.genres.map(item => item.name) : [];
 
@@ -348,13 +336,6 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
     conditionalContent = (
       <>
         <MasterContainer posterPath={posterURL + movie.backdrop_path}>
-<<<<<<< Updated upstream
-          <LeftContainer>
-            <Poster src={posterURL + movie.poster_path}></Poster>
-            {movie.details.tagline && (
-              <TaglineText>"{movie.details.tagline}"</TaglineText>
-            )}
-=======
           <DesktopBackButton to="../">
             <BackIcon />
             Back
@@ -362,46 +343,18 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
           <LeftContainer>
             <Poster src={mobilePosterURL + movie.poster_path}></Poster>
             {movie.tagline && <TaglineText>"{movie.tagline}"</TaglineText>}
->>>>>>> Stashed changes
             <LeftButtons>
               <Trailer urlKey={videos.results && videos.results[0].key} />
               <AddFavoriteButton movie={movie} favorites={state.favorites} />
             </LeftButtons>
           </LeftContainer>
           <CenterContainer>
-<<<<<<< Updated upstream
-            <MovieTitle>{movie.title}</MovieTitle>
-            <Text>
-              {movie.details.genres
-                .map(item => {
-                  let arr = [];
-                  arr.push(item.name);
-                  return arr;
-                })
-                .join(", ")}
-=======
             <Header>
               <h1>{movie.title}</h1>
               <h2>{movie.genres.join(", ")}</h2>
->>>>>>> Stashed changes
               <div style={{ display: "flex" }}>
                 {movie.runtime !== 0 && (
                   <>
-<<<<<<< Updated upstream
-                    <RuntimeIcon />
-                    {convertedRuntime} &middot;
-                  </>
-                )}
-                {movie.details.vote_average !== 0 && (
-                  <Text style={{ color: "gold" }}>
-                    <RatingIcon />
-                    {movie.details.vote_average}
-                  </Text>
-                )}
-              </div>
-            </Text>
-            <MoviePlot>{movie.overview}</MoviePlot>
-=======
                     <h2>
                       <RuntimeIcon />
                       {movie.runtime}
@@ -423,7 +376,6 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
               <p>{movie.overview}</p>
             </MoviePlot>
 
->>>>>>> Stashed changes
             {/* <CastContainer>
           <Cast style={{ flexDirection: "row" }} cast={creditsData.cast} /> 
           <ExpandButton
@@ -481,77 +433,6 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
               </DetailContainer>
             </BottomContainer>
           </CenterContainer>
-<<<<<<< Updated upstream
-        </MasterContainer>
-      )}
-
-      {isMobileorTablet && (
-        <>
-          <MobileContainer posterPath={posterURL + movie.poster_path}>
-            <BackButton onClick={() => navigate("../")}>
-              <BackIcon />
-            </BackButton>
-            <MobileDetails>
-              <MobileTitle>{movie.title}</MobileTitle>
-              {movie.details.tagline && (
-                <MobileTaglineText>"{movie.details.tagline}"</MobileTaglineText>
-              )}
-              <ChipContainer>
-                {genresArray.map((item, index) => (
-                  <Pill
-                    color="primary"
-                    size="small"
-                    key={index}
-                    label={item}
-                  ></Pill>
-                ))}
-              </ChipContainer>
-              <SubTextContainer>
-                {convertedReleaseDate.format("YYYY")} &middot;
-                {movie.details.runtime !== 0 && (
-                  <RuntimeContainer>
-                    <RuntimeIcon />
-                    {convertedRuntime} &middot;
-                  </RuntimeContainer>
-                )}
-                {movie.details.vote_average !== 0 && (
-                  <RatingContainer>
-                    <RatingIcon />
-                    {movie.details.vote_average}
-                  </RatingContainer>
-                )}
-              </SubTextContainer>
-              <SideContainer>
-                <MobilePlot>{movie.overview}</MobilePlot>
-                {isLargeTablet && (
-                  <TabletContainer>
-                    <TabletText>
-                      Budget: $
-                      {parseFloat(movie.details.budget).toLocaleString("en")}
-                    </TabletText>
-                    <TabletText>
-                      Revenue: $
-                      {parseFloat(movie.details.revenue).toLocaleString("en")}
-                    </TabletText>
-                  </TabletContainer>
-                )}
-              </SideContainer>
-            </MobileDetails>
-            <ButtonContainer>
-              <Trailer
-                urlKey={
-                  movie.details.videos.results &&
-                  movie.details.videos.results[0].key
-                }
-              />
-              <AddFavoriteButton movie={movie} favorites={state.favorites} />
-            </ButtonContainer>
-          </MobileContainer>
-        </>
-      )}
-    </>
-  );
-=======
           {/* <ScreenshotContainer>
             {movie.images.backdrops.slice(4, 8).map((image, i) => (
               <ScreenshotGradient
@@ -571,7 +452,6 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
     console.log(credits, "from reducer");
   }
   return <>{conditionalContent}</>;
->>>>>>> Stashed changes
 };
 
 export default FullMoviePage;
