@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.js": "/MovieCards/static/js/main.12ff37ba.chunk.js",
-    "main.js.map": "/MovieCards/static/js/main.12ff37ba.chunk.js.map",
-    "runtime-main.js": "/MovieCards/static/js/runtime-main.2f6c75cf.js",
-    "runtime-main.js.map": "/MovieCards/static/js/runtime-main.2f6c75cf.js.map",
-    "static/css/2.8ae8ad59.chunk.css": "/MovieCards/static/css/2.8ae8ad59.chunk.css",
-    "static/js/2.5bf142a8.chunk.js": "/MovieCards/static/js/2.5bf142a8.chunk.js",
-    "static/js/2.5bf142a8.chunk.js.map": "/MovieCards/static/js/2.5bf142a8.chunk.js.map",
-    "index.html": "/MovieCards/index.html",
-    "precache-manifest.6582b924125507e2fe8c0d9c1db30882.js": "/MovieCards/precache-manifest.6582b924125507e2fe8c0d9c1db30882.js",
-    "service-worker.js": "/MovieCards/service-worker.js",
-    "static/css/2.8ae8ad59.chunk.css.map": "/MovieCards/static/css/2.8ae8ad59.chunk.css.map",
-    "static/media/posterplaceholder.jpg": "/MovieCards/static/media/posterplaceholder.5eb0b883.jpg",
-    "static/media/index.css": "/MovieCards/static/media/roboto-latin-900italic.ebf6d164.woff2"
+    "main.js": "/MovieCards/popular/static/js/main.12ff37ba.chunk.js",
+    "main.js.map": "/MovieCards/popular/static/js/main.12ff37ba.chunk.js.map",
+    "runtime-main.js": "/MovieCards/popular/static/js/runtime-main.2f65e79b.js",
+    "runtime-main.js.map": "/MovieCards/popular/static/js/runtime-main.2f65e79b.js.map",
+    "static/css/2.be959d91.chunk.css": "/MovieCards/popular/static/css/2.be959d91.chunk.css",
+    "static/js/2.96986cb5.chunk.js": "/MovieCards/popular/static/js/2.96986cb5.chunk.js",
+    "static/js/2.96986cb5.chunk.js.map": "/MovieCards/popular/static/js/2.96986cb5.chunk.js.map",
+    "index.html": "/MovieCards/popular/index.html",
+    "precache-manifest.faba82695f9528740c112ab79393ac43.js": "/MovieCards/popular/precache-manifest.faba82695f9528740c112ab79393ac43.js",
+    "service-worker.js": "/MovieCards/popular/service-worker.js",
+    "static/css/2.be959d91.chunk.css.map": "/MovieCards/popular/static/css/2.be959d91.chunk.css.map",
+    "static/media/posterplaceholder.jpg": "/MovieCards/popular/static/media/posterplaceholder.5eb0b883.jpg",
+    "static/media/index.css": "/MovieCards/popular/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.2f6c75cf.js",
-    "static/css/2.8ae8ad59.chunk.css",
-    "static/js/2.5bf142a8.chunk.js",
+    "static/js/runtime-main.2f65e79b.js",
+    "static/css/2.be959d91.chunk.css",
+    "static/js/2.96986cb5.chunk.js",
     "static/js/main.12ff37ba.chunk.js"
   ]
 }
