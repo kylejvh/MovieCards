@@ -1,3 +1,4 @@
+//! put errors, loading, messagehandling, etc. here
 import {
   FETCH_MOVIE_INITIATED,
   FETCH_MOVIE_FAILED,
@@ -6,11 +7,6 @@ import {
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  movie: null,
-  credits: null,
-  videos: null,
-  images: null,
-  clickedMovieId: "",
   isError: false,
   isLoading: false
 };
