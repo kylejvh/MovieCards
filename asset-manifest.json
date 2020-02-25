@@ -1,22 +1,23 @@
 {
   "files": {
-    "main.css": "/React-MovieCards/static/css/main.acf4f44f.chunk.css",
-    "main.js": "/React-MovieCards/static/js/main.d3504be0.chunk.js",
-    "main.js.map": "/React-MovieCards/static/js/main.d3504be0.chunk.js.map",
-    "runtime-main.js": "/React-MovieCards/static/js/runtime-main.2caa9eb0.js",
-    "runtime-main.js.map": "/React-MovieCards/static/js/runtime-main.2caa9eb0.js.map",
-    "static/js/2.e810ba32.chunk.js": "/React-MovieCards/static/js/2.e810ba32.chunk.js",
-    "static/js/2.e810ba32.chunk.js.map": "/React-MovieCards/static/js/2.e810ba32.chunk.js.map",
-    "index.html": "/React-MovieCards/index.html",
-    "precache-manifest.1cc6074ab6a4639730e4864ffe74193f.js": "/React-MovieCards/precache-manifest.1cc6074ab6a4639730e4864ffe74193f.js",
-    "service-worker.js": "/React-MovieCards/service-worker.js",
-    "static/css/main.acf4f44f.chunk.css.map": "/React-MovieCards/static/css/main.acf4f44f.chunk.css.map",
-    "static/media/posterplaceholder.jpg": "/React-MovieCards/static/media/posterplaceholder.5eb0b883.jpg"
+    "main.js": "/MovieCards/static/js/main.318b65da.chunk.js",
+    "main.js.map": "/MovieCards/static/js/main.318b65da.chunk.js.map",
+    "runtime-main.js": "/MovieCards/static/js/runtime-main.2f6c75cf.js",
+    "runtime-main.js.map": "/MovieCards/static/js/runtime-main.2f6c75cf.js.map",
+    "static/css/2.8ae8ad59.chunk.css": "/MovieCards/static/css/2.8ae8ad59.chunk.css",
+    "static/js/2.5bf142a8.chunk.js": "/MovieCards/static/js/2.5bf142a8.chunk.js",
+    "static/js/2.5bf142a8.chunk.js.map": "/MovieCards/static/js/2.5bf142a8.chunk.js.map",
+    "index.html": "/MovieCards/index.html",
+    "precache-manifest.ea26e02fe8dc2987fe5fe471953be0ae.js": "/MovieCards/precache-manifest.ea26e02fe8dc2987fe5fe471953be0ae.js",
+    "service-worker.js": "/MovieCards/service-worker.js",
+    "static/css/2.8ae8ad59.chunk.css.map": "/MovieCards/static/css/2.8ae8ad59.chunk.css.map",
+    "static/media/posterplaceholder.jpg": "/MovieCards/static/media/posterplaceholder.5eb0b883.jpg",
+    "static/media/index.css": "/MovieCards/static/media/roboto-latin-900italic.ebf6d164.woff2"
   },
   "entrypoints": [
-    "static/js/runtime-main.2caa9eb0.js",
-    "static/js/2.e810ba32.chunk.js",
-    "static/css/main.acf4f44f.chunk.css",
-    "static/js/main.d3504be0.chunk.js"
+    "static/js/runtime-main.2f6c75cf.js",
+    "static/css/2.8ae8ad59.chunk.css",
+    "static/js/2.5bf142a8.chunk.js",
+    "static/js/main.318b65da.chunk.js"
   ]
 }
