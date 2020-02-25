@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/MovieCards/popular/static/js/main.12ff37ba.chunk.js",
-    "main.js.map": "/MovieCards/popular/static/js/main.12ff37ba.chunk.js.map",
+    "main.js": "/MovieCards/popular/static/js/main.dac77767.chunk.js",
+    "main.js.map": "/MovieCards/popular/static/js/main.dac77767.chunk.js.map",
     "runtime-main.js": "/MovieCards/popular/static/js/runtime-main.2f65e79b.js",
     "runtime-main.js.map": "/MovieCards/popular/static/js/runtime-main.2f65e79b.js.map",
     "static/css/2.be959d91.chunk.css": "/MovieCards/popular/static/css/2.be959d91.chunk.css",
     "static/js/2.96986cb5.chunk.js": "/MovieCards/popular/static/js/2.96986cb5.chunk.js",
     "static/js/2.96986cb5.chunk.js.map": "/MovieCards/popular/static/js/2.96986cb5.chunk.js.map",
     "index.html": "/MovieCards/popular/index.html",
-    "precache-manifest.faba82695f9528740c112ab79393ac43.js": "/MovieCards/popular/precache-manifest.faba82695f9528740c112ab79393ac43.js",
+    "precache-manifest.0bb4b0150bb2638713aadb22429f5f7a.js": "/MovieCards/popular/precache-manifest.0bb4b0150bb2638713aadb22429f5f7a.js",
     "service-worker.js": "/MovieCards/popular/service-worker.js",
     "static/css/2.be959d91.chunk.css.map": "/MovieCards/popular/static/css/2.be959d91.chunk.css.map",
     "static/media/posterplaceholder.jpg": "/MovieCards/popular/static/media/posterplaceholder.5eb0b883.jpg",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.2f65e79b.js",
     "static/css/2.be959d91.chunk.css",
     "static/js/2.96986cb5.chunk.js",
-    "static/js/main.12ff37ba.chunk.js"
+    "static/js/main.dac77767.chunk.js"
   ]
 }
