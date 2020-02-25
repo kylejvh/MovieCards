@@ -1,6 +1,6 @@
 // import React, { useState, useEffect, useContext } from "react";
 // import styled from "styled-components";
-// import { Tab } from "semantic-ui-react";
+
 // // import {  //! React Scroll, not implemented.
 // //   Link,
 // //   Element,
@@ -9,14 +9,6 @@
 // //   scrollSpy,
 // //   scroller
 // // } from "react-scroll";
-
-// import { useMediaQuery } from "react-responsive";
-
-// import Trailer from "../components/Trailer";
-
-// import axios from "axios";
-
-// import { CTX } from "../components/Store/Store";
 
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
@@ -214,7 +206,6 @@
 //   // const {  } = props.clickedMovieState;
 
 //   // Over a certain width, take the top hero image and render it as the background image, overlaying all other components.
-//   const isMobile = window.innerWidth > 800;
 
 //   // semantic ui code...
 //   const panes = [

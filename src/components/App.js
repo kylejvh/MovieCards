@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import history from "./history";
 import React from "react";
 import { createGlobalStyle } from "styled-components";
@@ -42,12 +42,18 @@ const App = () => {
           component={Navigation}
         /> */}
         <Switch>
-          <Route exact path="/" component={PopularMovies} />
+          <Redirect exact from="/" to="/popular" />
+          <Route exact path="/popular" component={PopularMovies} />
           <Route exact path="/upcoming" component={UpcomingMovies} />
-          <Route path="/search" component={Search} />
-          <Route path="/favorites" component={Favorites} />
+          <Route exact path="/search" component={Search} />
+          <Route exact path="/favorites" component={Favorites} />
           <Route
-            path={["/:id", "/upcoming/:id", "/search/:id", "/favorites/:id"]}
+            path={[
+              "/popular/:id",
+              "/upcoming/:id",
+              "/search/:id",
+              "/favorites/:id"
+            ]}
             component={NewMoviePage}
           />
         </Switch>

@@ -1,37 +1,45 @@
 import {
-  FETCH_MOVIES_INITIATED,
-  FETCH_MOVIES_FAILED,
-  FETCH_MOVIES_SUCCEEDED
+  FETCH_TRAILERS_INITIATED,
+  FETCH_TRAILERS_FAILED,
+  FETCH_TRAILERS_SUCCEEDED,
+  VIDEO_CLICKED
 } from "../actions/types";
 
 const INITIAL_STATE = {
-  movies: [],
+  trailers: null,
+  clickedVideo: null,
   isError: false,
   isLoading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case FETCH_MOVIES_INITIATED:
+    case FETCH_TRAILERS_INITIATED:
       return {
         ...state,
         isError: false,
         isLoading: true
       };
 
-    case FETCH_MOVIES_FAILED:
+    case FETCH_TRAILERS_FAILED:
       return {
         ...state,
         isError: true,
         isLoading: false
       };
 
-    case FETCH_MOVIES_SUCCEEDED:
+    case FETCH_TRAILERS_SUCCEEDED:
       return {
         ...state,
-        movies: action.payload,
+        trailers: action.payload,
         isError: false,
         isLoading: false
+      };
+
+    case VIDEO_CLICKED:
+      return {
+        ...state,
+        clickedVideo: action.payload
       };
 
     default:

@@ -26,8 +26,6 @@ const MovieDetail = () => {
       setVideos(result.data.videos);
       setImages(result.data.images);
       setCredits(result.data.credits);
-
-      console.log(result.data, "new data fetch...");
     } catch (error) {
       if (axios.isCancel(error)) {
         console.log("Singe Request Cancelled");

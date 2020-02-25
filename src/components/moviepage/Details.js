@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import * as S from "./styles";
 
 import { connect } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions";
@@ -82,8 +83,12 @@ const BackButton = styled(Link)`
 `;
 
 const ButtonContainer = styled.div`
-  margin: 3em 0 0 0;
+  margin: 1em 0 0 0;
   display: flex;
+
+  @media screen and (max-width: 1023px) {
+    margin: 0 auto;
+  }
 `;
 
 const DesktopBackButton = styled(BackButton)`
@@ -123,7 +128,7 @@ const CenterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 35%;
+  width: 30%;
   /* background: rgba(0, 0, 0, 0.93); */
 
   /* linear-gradient(
@@ -134,7 +139,25 @@ const CenterContainer = styled.div`
   ); */
   /* box-shadow: 0 0 5px 15px rgba(0, 0, 0, 0.93); */
 
-  margin: 3em 3em;
+  margin: 3em 1.5em;
+
+  @media screen and (max-width: 1023px) {
+    font-size: 14px;
+    width: calc(100% - 7em);
+    height: calc(100% - 3.5em);
+    margin: 0 3.5em 3.5em 3.5em;
+    justify-content: flex-end;
+    align-items: stretch;
+  }
+
+  @media screen and (max-width: 599px) {
+    font-size: 12px;
+    width: calc(100% - 3em);
+    height: calc(100% - 3.5em);
+    margin: 0 1.5em 3.5em 1.5em;
+    justify-content: flex-end;
+    align-items: stretch;
+  }
 `;
 
 // const CastContainer = styled.div`
@@ -144,16 +167,29 @@ const CenterContainer = styled.div`
 
 const BottomContainer = styled.div`
   display: flex;
+
+  @media screen and (max-width: 1500px) and (min-width: 1024px) {
+    flex-flow: column;
+  }
 `;
 
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 3em 2.5em 0 0;
+  margin: 3em 1em 1em 1em;
+
+  @media screen and (max-width: 1500px) {
+    margin: 0.75em auto;
+    text-align: left;
+  }
 `;
 
 const Header = styled.div`
   margin-bottom: 1em;
+
+  @media screen and (max-width: 1023px) {
+    margin-bottom: 0.5em;
+  }
 
   h1 {
     font-family: "Titillium Web", sans-serif;
@@ -162,6 +198,10 @@ const Header = styled.div`
       4px 4px 5px rgba(0, 0, 0, 0.7), 0px 0px 7px rgba(0, 0, 0, 0.4);
     margin: 0 0 0.25em 0;
     padding: 0;
+
+    @media screen and (max-width: 1023px) {
+      font-size: 1.667em;
+    }
   }
 
   h2 {
@@ -187,11 +227,11 @@ const DetailTitle = styled(MovieTitle)`
 
 const Text = styled.p`
   font-size: 1em;
-  margin: 0 0 0.1em 0;
+  margin: 0;
 `;
 
 const MoviePlot = styled.div`
-  margin: 3em 0 0 0;
+  margin-top: 3em;
 
   h1 {
     font-size: 1.25em;
@@ -200,6 +240,16 @@ const MoviePlot = styled.div`
 
   p {
     font-size: 1em;
+    line-height: 1.4;
+    width: 85%;
+  }
+
+  @media screen and (max-width: 1023px) {
+    margin-top: 0.5em;
+
+    p {
+      width: 100%;
+    }
   }
 `;
 
@@ -241,11 +291,24 @@ const TaglineText = styled.h3`
     margin-left: 0.1em;
     vertical-align: -0.2em;
   }
+
+  @media screen and (max-width: 1023px) {
+    text-align: left;
+    font-size: 1.5em;
+  }
+
+  @media screen and (max-width: 799px) {
+    display: none;
+  }
 `;
 
-const Details = props => {
-  const { movie, videos, favorites, addFavorite, removeFavorite } = props;
-
+const Details = ({
+  movie = [],
+  videos = [],
+  favorites = [],
+  addFavorite,
+  removeFavorite
+}) => {
   let genresArray = movie ? movie.genres.map(item => item.name) : null;
 
   const convertRuntime = num => {
@@ -327,9 +390,9 @@ const Details = props => {
           </BottomContainer>
 
           <ButtonContainer>
-            {videos.results === [] ? null : (
+            {/* {videos.results === [] ? null : (
               <Trailer urlKey={videos.results[0].key} />
-            )}
+            )} */}
             {isInFavorites ? (
               <Button
                 title={"Remove from List"}
@@ -347,6 +410,8 @@ const Details = props => {
 
 const mapStateToProps = state => {
   return {
+    movie: state.movie.movie,
+    videos: state.movie.videos,
     favorites: state.favorites.favoritesList
   };
 };

@@ -10,7 +10,7 @@ const AddButton = styled.button`
   outline: none;
   border-radius: 0.8em;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1.1em;
   transition: background 250ms ease-in-out, transform 150ms ease;
   text-decoration: none;
   background: #2769b4;

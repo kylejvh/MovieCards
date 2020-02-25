@@ -6,10 +6,14 @@ import { useScroll } from "react-use-gesture";
 import { ArrowLeftCircle } from "styled-icons/remix-fill/ArrowLeftCircle";
 import { ArrowRightCircle } from "styled-icons/remix-fill/ArrowRightCircle";
 
+import { ChevronsDown } from "styled-icons/boxicons-regular/ChevronsDown";
+
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  display: flex;
+  width: 100%;
+  margin: auto 0 2em 0;
+  position: relative;
 `;
 
 const LeftScroll = styled(ArrowLeftCircle)`
@@ -25,11 +29,23 @@ const LeftScroll = styled(ArrowLeftCircle)`
   }
 `;
 
-const RightScroll = styled(ArrowRightCircle)`
+const HorizontalContainer = styled.div`
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+  
+  /* margin-left: ${props => (props.scrollArrow ? "6em" : "")}; */
+  padding: 20px 0;
+
+`;
+
+const ScrollButton = styled.button`
   width: 4em;
-  margin-left: 2em;
-  align-self: center;
-  transition: all 300ms ease;
+  color: white;
+  background: none;
+  outline: none;
+  border: none;
+  transition: all 200ms ease;
 
   :hover {
     cursor: pointer;
@@ -38,13 +54,62 @@ const RightScroll = styled(ArrowRightCircle)`
   }
 `;
 
-const HorizontalContainer = styled.div`
-  display: flex;
-  overflow-x: scroll;
-  width: 60vw;
+const NewScrollButton = styled.button`
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  ${props => props.direction === "left" && "left: 0"}
+
+  ${props => props.direction === "right" && "right: 0"}
+
+  width: 2.5em;
+  background: rgba(0, 0, 0, 0.5);
+  border: 0;
+  outline: 0;
   padding: 0;
-  margin-left: ${props => (props.scrollArrow ? "6em" : "")};
-  padding: 20px 0;
+  margin: 1em 0;
+  z-index: 4;
+
+  :hover {
+    cursor: pointer;
+  }
+  /* 
+  span {
+    width: 25px;
+    color: #fff;
+    display: block;
+    margin: 0 auto;
+  }
+
+  &--next {
+    right: 0;
+
+    span {
+      transform: rotateZ(-90deg);
+    }
+  }
+
+  &--prev {
+    left: 0;
+
+    span {
+      transform: rotateZ(90deg);
+    }
+  }
+} */
+`;
+
+const PrevIcon = styled(ChevronsDown)`
+  transform: rotateZ(90deg);
+  left: 0;
+  color: #fff;
+  display: block;
+  margin: 0 auto;
+`;
+
+const NextIcon = styled(PrevIcon)`
+  transform: rotateZ(-90deg);
+  left: 0;
 `;
 
 const AnimatedCastCard = styled(animated.div)`
@@ -73,7 +138,7 @@ const Text = styled.p`
   margin: 0.5em 0;
 `;
 
-const ScrollContainer = props => {
+const ScrollContainer = ({ children, scrollDistance = 300 }) => {
   const refContainer = useRef(null);
 
   const [overflowPresent, setOverflowPresent] = useState(false);
@@ -95,7 +160,7 @@ const ScrollContainer = props => {
     setCanScrollRight(scrollLeft !== scrollWidth - clientWidth);
   };
 
-  const debounceCheckForOverflow = debounce(checkForOverflow, 500);
+  const debounceCheckForOverflow = debounce(checkForOverflow, 1000);
   const debounceCheckForScrollPosition = debounce(checkForScrollPosition, 500);
 
   const scrollContainerBy = distance => {
@@ -136,8 +201,14 @@ const ScrollContainer = props => {
       <>
         <Wrapper>
           {canScrollLeft && (
-            <LeftScroll onClick={() => scrollContainerBy(-300)} />
+            <NewScrollButton
+              direction="left"
+              onClick={() => scrollContainerBy(-scrollDistance)}
+            >
+              <PrevIcon />
+            </NewScrollButton>
           )}
+
           <HorizontalContainer
             ref={node => {
               refContainer.current = node;
@@ -145,20 +216,16 @@ const ScrollContainer = props => {
             {...bind()}
             scrollArrow={!canScrollLeft}
           >
-            {props.children}
-            {[].slice(0, 15).map(person => {
-              return (
-                <AnimatedCastCard key={person.id} style={{ ...style }}>
-                  <CastImg
-                    src={"tempPersonURL + person.profile_path"}
-                    alt={`Cast member: ${person.name}`}
-                  />
-                </AnimatedCastCard>
-              );
-            })}
+            {children}
           </HorizontalContainer>
+
           {canScrollRight && (
-            <RightScroll onClick={() => scrollContainerBy(300)} />
+            <NewScrollButton
+              direction="right"
+              onClick={() => scrollContainerBy(scrollDistance)}
+            >
+              <NextIcon />
+            </NewScrollButton>
           )}
         </Wrapper>
       </>

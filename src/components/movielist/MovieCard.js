@@ -12,14 +12,15 @@ import RemoveFavoriteButton from "../Helper/RemoveFavoriteButton";
 
 const CardContainer = styled.div`
   position: relative;
-  flex: 0 0 9%;
+  flex: 0 0 calc(10% - 40px);
+  margin: 36px 20px;
   display: flex;
-  justify-content: space-around;
 
-  margin: 1.55vw 1vw;
+  /* margin: 1.55vw 1vw; */
+
   border-radius: 10px 10px 0 0;
-  transition: transform;
-  transition-duration: 0.25s;
+  transition: transform ease 300ms;
+
   color: white;
 
   :hover {
@@ -28,27 +29,34 @@ const CardContainer = styled.div`
   }
 
   @media screen and (max-width: 3000px) {
-    flex: 0 0 10%;
+    flex: 0 0 calc(14.2857% - 36px);
+    margin: 24px 18px;
   }
 
-  @media screen and (max-width: 2000px) {
-    flex: 0 0 13%;
+  @media screen and (max-width: 1921px) {
+    flex: 0 0 calc(16.6667% - 28px);
+    margin: 22px 14px;
   }
 
   @media screen and (max-width: 1440px) {
-    flex: 1 0 15%;
+    flex: 0 0 calc(20% - 20px);
+    margin: 15px 10px;
   }
 
   @media screen and (max-width: 1025px) {
-    flex: 1 0 25%;
+    flex: 0 0 calc(25% - 16px);
+    margin: 10px 8px;
   }
 
-  @media screen and (max-width: 640px) {
-    flex: 1 0 25%;
+  @media screen and (max-width: 779px) {
+    flex: 0 0 calc(33.33% - 16px);
+    margin: 10px 8px;
   }
 
   @media screen and (max-width: 361px) {
-    flex: 1 0 33%;
+    /* flex: 1 0 33%; */
+    flex: 0 0 calc(50% - 10px);
+    margin: 10px 5px;
   }
 `;
 

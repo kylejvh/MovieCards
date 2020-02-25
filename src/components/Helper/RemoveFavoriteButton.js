@@ -6,6 +6,7 @@ import { Delete } from "styled-icons/material/Delete";
 const DeleteButton = styled.button`
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.88);
   color: red;
   position: absolute;

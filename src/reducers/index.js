@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import favoritesReducer from "./favoritesReducer";
 import singleMovieReducer from "./singleMovieReducer";
-import multipleMovieReducer from "./multipleMovieReducer";
+import multipleMoviesReducer from "./multipleMoviesReducer";
+import movieTrailersReducer from "./movieTrailersReducer";
 
 export default combineReducers({
   favorites: favoritesReducer,
   movie: singleMovieReducer,
-  movies: multipleMovieReducer
+  movies: multipleMoviesReducer,
+  trailers: movieTrailersReducer
 });

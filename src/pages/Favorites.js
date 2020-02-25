@@ -1,26 +1,20 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import styled from "styled-components";
 
-import MovieCard from "../components/MovieCard/MovieCard";
-import { connect } from "react-redux";
+import MovieList from "../components/movielist/MovieList";
 
-const MovieContainer = styled.div`
-  display: flex;
-  flex-flow: row wrap;
-  width: 100%;
+const Wrapper = styled.div`
+  margin-top: 4em;
 
-  @media screen and (max-width: 3000px) {
-    justify-content: center;
-  }
-
-  @media screen and (max-width: 2000px) {
-    justify-content: center;
+  @media screen and (max-width: 500px) {
+    margin-top: 3em;
   }
 `;
 
 const PageText = styled.h1`
-  font-size: 1.5em;
-  margin: 1.5em 1em 0 1em;
+  font-size: 1em;
+  margin: 0 6em;
   color: #7ca579;
 `;
 
@@ -54,16 +48,15 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-const Favorites = props => {
+const Favorites = ({ favorites = [] }) => {
   const [toggleRemove, setToggleRemove] = useState(false);
-  const { favorites } = props;
 
-  const renderFavorites = favorites.map(movie => (
-    <MovieCard key={movie.id} movie={movie} removeMode={toggleRemove} />
-  ));
+  // const renderFavorites = favorites.map(movie => (
+  //   <MovieCard key={movie.id} movie={movie} removeMode={toggleRemove} />
+  // ));
 
   return (
-    <>
+    <Wrapper>
       {console.log(favorites.length, "favortires")}
       {favorites.length > 0 ? (
         <>
@@ -74,14 +67,14 @@ const Favorites = props => {
             </RemoveModeButton>
           </ButtonContainer>
 
-          <MovieContainer>{renderFavorites}</MovieContainer>
+          <MovieList />
         </>
       ) : (
         <PageText>
           You have no favorites! Add favorites to quickly access them here.
         </PageText>
       )}
-    </>
+    </Wrapper>
   );
 };
 
