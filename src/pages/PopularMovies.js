@@ -16,37 +16,21 @@ const Wrapper = styled.div`
 `;
 
 const PageText = styled.h1`
-<<<<<<< HEAD
-  font-size: 1.5em;
-  margin: 1.5em 1em 0.75em 1em;
-  color: #7ca579;
-
-  @media screen and (min-width: 1824px) {
-    margin-left: 5em;
-=======
   font-size: 1em;
   margin: 0 6em;
   color: #7ca579;
 
   @media screen and (max-width: 500px) {
     margin: 1em;
->>>>>>> develop
   }
 `;
 
 const PopularMovies = ({ isError, isLoading, fetchMovies }) => {
   const url = `/discover/movie?api_key=${TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`;
 
-<<<<<<< HEAD
-  const [{ data, isLoading, isError }] = useAxiosHook(url);
-  const moviecards = data.map(movie => (
-    <MovieCard key={movie.id.toString()} movie={movie}></MovieCard>
-  ));
-=======
   useEffect(() => {
     fetchMovies(url);
   }, [fetchMovies, url]);
->>>>>>> develop
 
   return (
     <Wrapper>
@@ -55,18 +39,9 @@ const PopularMovies = ({ isError, isLoading, fetchMovies }) => {
       {isLoading ? (
         <Loader />
       ) : (
-<<<<<<< HEAD
-        <MovieContainer>
-          {/* {data.map(movie => (
-            <MovieCard key={movie.id} movie={movie}></MovieCard>
-          ))} */}
-          {moviecards}
-        </MovieContainer>
-=======
         <>
           <MovieList />
         </>
->>>>>>> develop
       )}
     </Wrapper>
   );

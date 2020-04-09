@@ -15,20 +15,11 @@ const StyledForm = styled.form`
 `;
 
 const StyledInput = styled.input`
-<<<<<<< HEAD
-  height: 2rem;
-  width: 4em;
-  transition: all 0.4s ease-in-out;
-  background: #151c24;
-  font-size: 1em;
-  padding: 0.5rem 1rem 0.5rem 1rem;
-=======
   width: ${(props) => (props.inlineForm ? "4.5em" : "20em")};
   height: ${(props) => (props.inlineForm ? "" : "2em")};
   transition: all 0.4s ease-in-out;
   background: #151c24;
   padding: 0.25em 0.75em;
->>>>>>> develop
   border: 2px solid black;
   border-radius: 1.5em;
   outline: none;
@@ -41,11 +32,6 @@ const StyledInput = styled.input`
     border-color: #2769b4;
   }
 
-<<<<<<< HEAD
-  @media screen and (min-width: 1824px) {
-    margin-left: 5em;
-    width: 6em;
-=======
   ::placeholder {
     font-size: 0.85em;
     color: rgb(225, 225, 225);
@@ -59,7 +45,6 @@ const StyledInput = styled.input`
   @media screen and (max-width: 480px) {
     width: ${(props) => (props.inlineForm ? "3em" : "40vw")};
     height: ${(props) => (props.inlineForm ? "" : "1.5em")};
->>>>>>> develop
   }
 `;
 

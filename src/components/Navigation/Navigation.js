@@ -28,14 +28,6 @@ const StyledLink = styled(NavLink)`
 
 const StyledNavbar = styled.nav`
   display: flex;
-<<<<<<< HEAD
-  flex-flow: row nowrap;
-  margin: 0 1em 1em 1em;
-
-  @media screen and (min-width: 1824px) {
-    font-size: 24px;
-    margin-left: 3.5em;
-=======
   /* background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.5),
@@ -47,18 +39,17 @@ const StyledNavbar = styled.nav`
   z-index: 999;
   width: 100%;
   justify-content: flex-end;
-  background: ${props => (props.linkStyle ? "rgba(0, 0, 0, 0.65)" : "none")};
+  background: ${(props) => (props.linkStyle ? "rgba(0, 0, 0, 0.65)" : "none")};
 
   padding: 0.5em 0;
 
   ${StyledLink} {
-    color: ${props => (props.linkStyle ? "white" : "#7ca887")};
-    box-shadow: ${props => (props.linkStyle ? "none" : "0 0.22em #151c24")};
+    color: ${(props) => (props.linkStyle ? "white" : "#7ca887")};
+    box-shadow: ${(props) => (props.linkStyle ? "none" : "0 0.22em #151c24")};
   }
 
   @media screen and (min-width: 1824px) {
     font-size: 18px;
->>>>>>> develop
   }
 
   @media screen and (max-width: 700px) {
@@ -90,11 +81,11 @@ const StyledNavbar = styled.nav`
 
 const Navigation = () => {
   const isMobile = useMediaQuery({
-    query: "(max-width: 600px)"
+    query: "(max-width: 600px)",
   });
 
   const activeStyle = {
-    boxShadow: "0em 0.2em teal"
+    boxShadow: "0em 0.2em teal",
   };
 
   let location = useLocation();
@@ -103,8 +94,8 @@ const Navigation = () => {
 
   const [linkStyle, setLinkStyle] = useState(false);
 
-  const changeLinksforLocation = location => {
-    if (rootLocations.find(path => path === `${location.pathname}`)) {
+  const changeLinksforLocation = (location) => {
+    if (rootLocations.find((path) => path === `${location.pathname}`)) {
       return setLinkStyle(false);
     } else {
       return setLinkStyle(true);
