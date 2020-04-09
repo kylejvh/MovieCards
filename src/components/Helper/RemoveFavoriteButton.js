@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import styled from "styled-components";
-
-import { CTX } from "../Store/Store";
 
 import { Delete } from "styled-icons/material/Delete";
 
 const DeleteButton = styled.button`
   width: 100%;
   height: 100%;
+
   background-color: rgba(0, 0, 0, 0.88);
   color: red;
   position: absolute;
@@ -25,20 +24,9 @@ const DeleteIcon = styled(Delete)`
   }
 `;
 
-const RemoveFavoriteButton = props => {
-  const { state, dispatch } = useContext(CTX);
-
-  const { favorites } = state;
-
-  // Returns an array with values that don't include movie id of movie that was clicked for removal.
-  const handleRemoveFavorite = () => {
-    const newFavorites = favorites.filter(item => item.id !== props.movie.id);
-
-    dispatch({ type: "REMOVED_FAVORITE", payload: newFavorites });
-  };
-
+const RemoveFavoriteButton = ({ onClick }) => {
   return (
-    <DeleteButton onClick={handleRemoveFavorite}>
+    <DeleteButton onClick={onClick}>
       <DeleteIcon />
     </DeleteButton>
   );

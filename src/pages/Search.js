@@ -1,49 +1,53 @@
 import React from "react";
 import styled from "styled-components";
+import { connect } from "react-redux";
 
-import Navigation from "../components/Navigation/Navigation";
 import Searchbar from "../components/Helper/Searchbar";
 import Loader from "../components/Helper/Loader";
-import MovieCard from "../components/MovieCard/MovieCard";
-import useAxiosHook from "../components/DataFetch/useAxiosHook";
-// import PageSwitch from "../components/PageSwitch";
+import MovieList from "../components/movielist/MovieList";
 
-const MovieContainer = styled.div`
+const SearchContainer = styled.div`
   display: flex;
-  flex-flow: row wrap;
-  justify-content: space-around;
-  margin: 1vw 1.5vw;
 
-  @media screen and (max-width: 3000px) {
-    justify-content: center;
+  justify-content: center;
+  margin: 6.5em 0 1.5em 0;
+
+  @media screen and (max-width: 1600px) {
+    margin: 4.5em 0 2em 0;
   }
 
-  @media screen and (max-width: 2000px) {
-    justify-content: center;
+  @media screen and (max-width: 800px) {
+    margin: 4.5em 0 2em 0;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin: 3.5em 0 2em 0;
   }
 `;
 
-const Search = () => {
-  const [{ data, isLoading }, doFetch] = useAxiosHook();
+// import PageSwitch from "../components/PageSwitch";
+
+const Search = ({ isError, isLoading }) => {
+  // const [{ data, isLoading }, doFetch] = useMovieData();
 
   // defaults = [1124, 335984, 1551398,  ["374720", ]
 
   return (
     <>
-      <Navigation />
-      <Searchbar onSubmit={doFetch} />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <MovieContainer>
-          {data.map(movie => {
-            return <MovieCard key={movie.id} movie={movie} />;
-          })}
-        </MovieContainer>
-      )}
+      <SearchContainer>
+        <Searchbar />
+      </SearchContainer>
+      {isLoading ? <Loader /> : <MovieList />}
       {/* <PageSwitch incrementPage={pageData} /> */}
     </>
   );
 };
 
-export default Search;
+const mapStateToProps = state => {
+  return {
+    isError: state.movies.isError,
+    isLoading: state.movies.isLoading
+  };
+};
+
+export default connect(mapStateToProps)(Search);

@@ -1,47 +1,142 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import NavLink from "./NavLink";
+import { NavLink, useLocation } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
-const StyledNavbar = styled.div`
+import Searchbar from "../Helper/Searchbar";
+
+const StyledLink = styled(NavLink)`
+  border: 1px solid #7ca887;
+  border: none;
+
+  box-shadow: 0 0.22em #151c24;
+  background: none;
+  margin: 0em 1.15em;
+  padding: 0 0.5em 0.2em;
+  outline: none;
+  text-decoration: none;
+
+  font-size: 1.05em;
+  font-weight: 600;
+  transition: all 0.2s ease-in-out;
+
+  :hover {
+    cursor: pointer;
+    opacity: 75%;
+  }
+`;
+
+const StyledNavbar = styled.nav`
   display: flex;
+<<<<<<< HEAD
   flex-flow: row nowrap;
   margin: 0 1em 1em 1em;
 
   @media screen and (min-width: 1824px) {
     font-size: 24px;
     margin-left: 3.5em;
+=======
+  /* background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.5),
+    rgba(0, 0, 0, 0.8)
+  ); */
+  position: absolute;
+  top: 0;
+
+  z-index: 999;
+  width: 100%;
+  justify-content: flex-end;
+  background: ${props => (props.linkStyle ? "rgba(0, 0, 0, 0.65)" : "none")};
+
+  padding: 0.5em 0;
+
+  ${StyledLink} {
+    color: ${props => (props.linkStyle ? "white" : "#7ca887")};
+    box-shadow: ${props => (props.linkStyle ? "none" : "0 0.22em #151c24")};
+  }
+
+  @media screen and (min-width: 1824px) {
+    font-size: 18px;
+>>>>>>> develop
   }
 
   @media screen and (max-width: 700px) {
     font-size: 18px;
     justify-content: center;
+
+    ${StyledLink} {
+      margin: 0 0.75em;
+    }
   }
 
   @media screen and (max-width: 480px) {
-    font-size: 14px;
     justify-content: center;
+    font-size: 14px;
+
+    ${StyledLink} {
+    }
   }
 
-  @media screen and (max-width: 380px) {
-    font-size: 12px;
+  @media screen and (max-width: 375px) {
     justify-content: center;
+    font-size: 12px;
+
+    ${StyledLink} {
+      margin: 0 0.3em;
+    }
   }
 `;
 
-const Navigation = props => {
+const Navigation = () => {
   const isMobile = useMediaQuery({
     query: "(max-width: 600px)"
   });
+
+  const activeStyle = {
+    boxShadow: "0em 0.2em teal"
+  };
+
+  let location = useLocation();
+
+  const rootLocations = ["/popular", "/upcoming", "/search", "/favorites"];
+
+  const [linkStyle, setLinkStyle] = useState(false);
+
+  const changeLinksforLocation = location => {
+    if (rootLocations.find(path => path === `${location.pathname}`)) {
+      return setLinkStyle(false);
+    } else {
+      return setLinkStyle(true);
+    }
+  };
+
+  useEffect(() => {
+    changeLinksforLocation(location);
+  }, [location]);
+
+  // if route match,
+  // render in place searchbar that will redirect to search page and enter query...
+
   return (
-    <StyledNavbar>
-      <NavLink to="/">{isMobile ? "Popular" : "Popular Movies"}</NavLink>
-      <NavLink to="/upcoming">
+    <StyledNavbar linkStyle={linkStyle}>
+      <StyledLink exact to="/popular" activeStyle={activeStyle}>
+        {isMobile ? "Popular" : "Popular Movies"}
+      </StyledLink>
+      <StyledLink to="/upcoming" activeStyle={activeStyle}>
         {isMobile ? "Upcoming" : "Upcoming Movies"}
-      </NavLink>
-      <NavLink to="/search">Search</NavLink>
-      <NavLink to="/favorites">Favorites</NavLink>
-      {/* <NavLink to="/byactor" buttonTitle="Discover by Actor" </NavLink> */}
+      </StyledLink>
+      <StyledLink to="/favorites" activeStyle={activeStyle}>
+        Favorites
+      </StyledLink>
+      {location.pathname === "/search" ? (
+        <StyledLink to="/search" activeStyle={activeStyle}>
+          Search
+        </StyledLink>
+      ) : (
+        <Searchbar inline />
+      )}
+      {/* <StyledLink to="/byactor" buttonTitle="Discover by Actor"  activeStyle={activeStyle} </StyledLink> */}
     </StyledNavbar>
   );
 };

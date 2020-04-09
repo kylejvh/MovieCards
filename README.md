@@ -1,6 +1,10 @@
 # MovieCards
 
+<<<<<<< HEAD
 ## **<a href="https://kylejvh.github.io/MovieCards/" target="_blank">Click here to demo</a>**
+=======
+## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
+>>>>>>> develop
 
 > This project represents my journey
 > into creating a robustly featured and continuously
