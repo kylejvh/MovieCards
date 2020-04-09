@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import * as S from "./styles";
 
 import { connect } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions";

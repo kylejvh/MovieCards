@@ -92,6 +92,7 @@ export const fetchTrailers = (trailerIds) => async (dispatch) => {
 };
 
 export const onVideoSelect = (video) => {
+  console.log("vid triggered...");
   return { type: VIDEO_CLICKED, payload: video };
 };
 

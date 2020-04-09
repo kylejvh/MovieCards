@@ -118,6 +118,7 @@ const Search = ({ inline, fetchMovies, submittedQuery }) => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
       />
+      {console.log(inline)}
       <StyledButton type="submit" inlineForm={inline}>
         <SearchIcon />
       </StyledButton>

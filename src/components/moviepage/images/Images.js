@@ -96,7 +96,7 @@ const Images = ({ backdrops = [], title = "" }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const [style, set] = useSpring(() => ({
-    transform: "perspective(500px) rotateY(0deg)"
+    transform: "perspective(500px) rotateY(0deg)",
   }));
 
   const thumbURL = "https://image.tmdb.org/t/p/w780";
@@ -105,15 +105,15 @@ const Images = ({ backdrops = [], title = "" }) => {
 
   let modalScrollLock;
 
-  const toggleScrollLock = bool => {
+  const toggleScrollLock = (bool) => {
     return (modalScrollLock = bool);
   };
 
-  const changeFocus = ref => {
+  const changeFocus = (ref) => {
     ref.focus();
   };
 
-  const onModalOpen = filepath => {
+  const onModalOpen = (filepath) => {
     setImageClick(filepath);
     setModalIsOpen(true);
 
@@ -140,7 +140,7 @@ const Images = ({ backdrops = [], title = "" }) => {
       )}
       <BottomContainer>
         <ComposedScrollContainer scrollDistance="1200">
-          {backdrops.slice(0, 20).map(image => {
+          {backdrops.slice(0, 20).map((image) => {
             return (
               <SpringContainer key={image.file_path} style={{ ...style }}>
                 <MovieImage
@@ -157,11 +157,11 @@ const Images = ({ backdrops = [], title = "" }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     backdrops: state.movie.images.backdrops,
     posters: state.movie.images.posters,
-    title: state.movie.movie.title
+    title: state.movie.movie.title,
   };
 };
 

@@ -103,7 +103,7 @@ const ImageModal = ({
   onModalClose,
   title,
   ariaLabel,
-  role = "dialog"
+  role = "dialog",
 }) => {
   const fullResURL = "https://image.tmdb.org/t/p/original";
 
@@ -111,20 +111,20 @@ const ImageModal = ({
   const [controls, setControls] = useState({ left: true, right: true });
 
   let currentIndex = images.findIndex(
-    item => item.file_path === modalImageSource
+    (item) => item.file_path === modalImageSource
   );
 
   const checkIndexes = () => {
     setControls({
       left: currentIndex - 1 >= 0,
-      right: currentIndex + 1 < images.length
+      right: currentIndex + 1 < images.length,
     });
   };
 
-  const prevImage = images =>
+  const prevImage = (images) =>
     setModalImageSource(images[currentIndex - 1].file_path);
 
-  const nextImage = images =>
+  const nextImage = (images) =>
     setModalImageSource(images[currentIndex + 1].file_path);
 
   const onKeyDown = ({ keyCode }) => keyCode === 27 && onModalClose();
@@ -149,14 +149,14 @@ const ImageModal = ({
       aria-label={ariaLabel}
       onKeyDown={onKeyDown}
     >
-      <Content onClick={e => e.stopPropagation()}>
+      <Content onClick={(e) => e.stopPropagation()}>
         <Heading>{title}</Heading>
         <ModalImage src={`${fullResURL}${modalImageSource}`} />
         <CloseButton
           as="button"
           onClick={onModalClose}
           aria-label="Close Modal"
-          ref={node => (buttonRef.current = node)}
+          ref={(node) => (buttonRef.current = node)}
         >
           <WindowClose />
         </CloseButton>

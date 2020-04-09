@@ -77,7 +77,7 @@ const Cast = ({ cast = [] }) => {
   const tempPersonURL = "https://image.tmdb.org/t/p/w500";
 
   const [style, set] = useSpring(() => ({
-    transform: "perspective(500px) rotateY(0deg)"
+    transform: "perspective(500px) rotateY(0deg)",
   }));
 
   const clamp = (value: num, clampAt: num = 30) => {
@@ -88,18 +88,18 @@ const Cast = ({ cast = [] }) => {
     }
   };
 
-  const bind = useScroll(event => {
+  const bind = useScroll((event) => {
     set({
       transform: `perspective(500px) rotateY(${
         event.scrolling ? clamp(event.delta[0]) : 0
-      }deg)`
+      }deg)`,
     });
   });
 
   return (
     <Wrapper>
       <ComposedScrollContainer>
-        {cast.slice(0, 15).map(person => {
+        {cast.slice(0, 15).map((person) => {
           return (
             <AnimatedCastCard key={person.id} style={{ ...style }}>
               <CastImg
@@ -122,9 +122,9 @@ const Cast = ({ cast = [] }) => {
   );
 };
 
-const mapsStateToProps = state => {
+const mapsStateToProps = (state) => {
   return {
-    cast: state.movie.credits.cast
+    cast: state.movie.credits.cast,
   };
 };
 

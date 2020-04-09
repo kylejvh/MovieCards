@@ -60,12 +60,12 @@ const StyledNavbar = styled.nav`
 
 const activeStyle = {
   boxShadow: "0em 0.2em teal",
-  color: "white"
+  color: "white",
 };
 
 const Navbar = ({ backdrops, videos }) => {
   const isMobile = useMediaQuery({
-    query: "(max-width: 600px)"
+    query: "(max-width: 600px)",
   });
 
   let { url } = useRouteMatch();
@@ -95,10 +95,10 @@ const Navbar = ({ backdrops, videos }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     backdrops: state.movie.images.backdrops,
-    videos: state.movie.videos.results
+    videos: state.movie.videos.results,
   };
 };
 
