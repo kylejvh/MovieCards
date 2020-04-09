@@ -31,7 +31,7 @@ const StyledInput = styled.input`
   :focus {
     border-color: #2769b4;
   }
-
+  /*  */
   ::placeholder {
     font-size: 0.85em;
     color: rgb(225, 225, 225);
