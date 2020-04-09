@@ -14,11 +14,11 @@ const Wrapper = styled.div`
 //! Use scrollcontainer component...
 
 const SpringContainer = styled(animated.div)`
-  flex: 0 0 calc(25% - 1.5em);
+  flex: 0 0 calc(25% - 1.5rem);
 
-  margin: 0 0.75em;
+  margin: 0 0.75rem;
 
-  @media screen and (max-width: 1279px) {
+  /* @media screen and (max-width: 1279px) {
     flex: 0 0 calc(33.3333% - 1.5em);
   }
 
@@ -30,14 +30,14 @@ const SpringContainer = styled(animated.div)`
   @media screen and (max-width: 500px) {
     flex: 0 0 calc(50% - 1em);
     margin: 0 0.5em;
-  }
+  } */
 `;
 
 const BottomContainer = styled.div`
   display: flex;
   align-self: flex-end;
   align-items: center;
-  margin-bottom: 3em;
+  margin-bottom: 3rem;
   height: 35%;
 `;
 

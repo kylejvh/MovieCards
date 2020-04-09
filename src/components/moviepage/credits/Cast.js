@@ -9,18 +9,8 @@ import styled from "styled-components";
 
 import AltPoster from "../../movielist/posterplaceholder.jpg";
 
-const Heading = styled.h1`
-  font-family: "Titillium Web", sans-serif;
-  font-size: 1.25em;
-  font-weight: 600;
-  text-shadow: -1px -1px 1px #aaa, 0px 4px 1px rgba(0, 0, 0, 0.5),
-    4px 4px 5px rgba(0, 0, 0, 0.7), 0px 0px 7px rgba(0, 0, 0, 0.4);
-  margin: 0 2.5em 1em 2.5em;
-  padding: 0;
-`;
-
 const Wrapper = styled.div`
-  margin: auto 0 3.5em 0;
+  margin: auto 0 3.5rem 0;
   max-width: 65%;
 
   @media screen and (max-width: 1023px) {
@@ -29,24 +19,23 @@ const Wrapper = styled.div`
     margin-top: 1em;
   }
 `;
-const CastWrapper = styled.div``;
 
 const AnimatedCastCard = styled(animated.div)`
   /* NEEDED */
 
-  flex: 0 0 7em;
-  margin: 0 0.5em;
+  flex: 0 0 7rem;
+  margin: 0 0.5rem;
   display: flex;
   flex-flow: column;
   align-items: center;
 
-  @media screen and (max-width: 1023px) {
+  /* @media screen and (max-width: 1023px) {
     flex: 0 0 7em;
   }
 
   @media screen and (max-width: 425px) {
     flex: 0 0 7em;
-  }
+  } */
 
   :first-child {
     /* margin: 1em 1.5em 1em 0;
@@ -55,11 +44,11 @@ const AnimatedCastCard = styled(animated.div)`
 `;
 
 const TextContainer = styled.div`
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 `;
 
 const CastImg = styled.img`
-  border-radius: 15px;
+  border-radius: 0.94rem;
   vertical-align: top;
 
   max-width: 100%;
@@ -71,11 +60,11 @@ const CastImg = styled.img`
 `;
 
 const Text = styled.p`
-  margin: 0.5em 0;
+  margin: 0.5rem 0;
 `;
 
 const CastText = styled(Text)`
-  margin: 0.25em;
+  margin: 0.25rem;
   text-align: center;
 `;
 
@@ -109,8 +98,6 @@ const Cast = ({ cast = [] }) => {
 
   return (
     <Wrapper>
-      {/* <Heading>Cast</Heading> */}
-
       <ComposedScrollContainer>
         {cast.slice(0, 15).map(person => {
           return (

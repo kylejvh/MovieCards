@@ -47,10 +47,10 @@ const PopularMovies = ({ isError, isLoading, fetchMovies }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isError: state.movies.isError,
-    isLoading: state.movies.isLoading
+    isLoading: state.movies.isLoading,
   };
 };
 

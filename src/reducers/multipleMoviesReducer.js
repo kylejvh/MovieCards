@@ -2,14 +2,14 @@ import {
   FETCH_MOVIES_INITIATED,
   FETCH_MOVIES_FAILED,
   FETCH_MOVIES_SUCCEEDED,
-  SEARCH_QUERY_SUBMITTED
+  SEARCH_QUERY_SUBMITTED,
 } from "../actions/types";
 
 const INITIAL_STATE = {
   movies: [],
   submittedQuery: "",
   isError: false,
-  isLoading: false
+  isLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -18,14 +18,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isError: false,
-        isLoading: true
+        isLoading: true,
       };
 
     case FETCH_MOVIES_FAILED:
       return {
         ...state,
         isError: true,
-        isLoading: false
+        isLoading: false,
       };
 
     case FETCH_MOVIES_SUCCEEDED:
@@ -33,13 +33,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         movies: action.payload,
         isError: false,
-        isLoading: false
+        isLoading: false,
       };
 
     case SEARCH_QUERY_SUBMITTED:
       return {
         ...state,
-        submittedQuery: action.payload
+        submittedQuery: action.payload,
       };
 
     default:

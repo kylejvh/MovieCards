@@ -10,13 +10,13 @@ import { connect } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 
 const StyledForm = styled.form`
-  margin: ${props => (props.inlineForm ? "-.25em 1.15em 0 1.15em" : "0 1em")};
+  margin: ${(props) => (props.inlineForm ? "-.25em 1.15em 0 1.15em" : "0 1em")};
   height: 0.9em;
 `;
 
 const StyledInput = styled.input`
-  width: ${props => (props.inlineForm ? "4.5em" : "20em")};
-  height: ${props => (props.inlineForm ? "" : "2em")};
+  width: ${(props) => (props.inlineForm ? "4.5em" : "20em")};
+  height: ${(props) => (props.inlineForm ? "" : "2em")};
   transition: all 0.4s ease-in-out;
   background: #151c24;
   padding: 0.25em 0.75em;
@@ -37,19 +37,19 @@ const StyledInput = styled.input`
   }
 
   @media screen and (max-width: 900px) {
-    width: ${props => (props.inlineForm ? "3em" : "40vw")};
-    height: ${props => (props.inlineForm ? "" : "1.5em")};
+    width: ${(props) => (props.inlineForm ? "3em" : "40vw")};
+    height: ${(props) => (props.inlineForm ? "" : "1.5em")};
   }
 
   @media screen and (max-width: 480px) {
-    width: ${props => (props.inlineForm ? "3em" : "40vw")};
-    height: ${props => (props.inlineForm ? "" : "1.5em")};
+    width: ${(props) => (props.inlineForm ? "3em" : "40vw")};
+    height: ${(props) => (props.inlineForm ? "" : "1.5em")};
   }
 `;
 
 const StyledButton = styled.button`
-  width: ${props => (props.inlineForm ? "1.8em" : "2.75em")};
-  height: ${props => (props.inlineForm ? "1.8em" : "2.75em")};
+  width: ${(props) => (props.inlineForm ? "1.8em" : "2.75em")};
+  height: ${(props) => (props.inlineForm ? "1.8em" : "2.75em")};
   border-radius: 50%;
   border: 2px solid black;
   margin: 0 0 0 0.25em;
@@ -107,7 +107,7 @@ const Search = ({ inline, fetchMovies, submittedQuery }) => {
   return (
     <StyledForm
       inlineForm={inline}
-      onSubmit={e => handleSearchSubmit(e, url, query, inline)}
+      onSubmit={(e) => handleSearchSubmit(e, url, query, inline)}
     >
       <StyledInput
         type="text"
@@ -116,9 +116,8 @@ const Search = ({ inline, fetchMovies, submittedQuery }) => {
         autoComplete="off"
         inlineForm={inline}
         value={query}
-        onChange={event => setQuery(event.target.value)}
+        onChange={(event) => setQuery(event.target.value)}
       />
-      {console.log(inline)}
       <StyledButton type="submit" inlineForm={inline}>
         <SearchIcon />
       </StyledButton>
@@ -126,9 +125,9 @@ const Search = ({ inline, fetchMovies, submittedQuery }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    submittedQuery: state.movies.submittedQuery
+    submittedQuery: state.movies.submittedQuery,
   };
 };
 

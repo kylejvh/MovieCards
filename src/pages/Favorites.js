@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { REMOVEMODE_TOGGLED } from "../actions/types";
 
 import MovieList from "../components/movielist/MovieList";
 
@@ -48,26 +49,27 @@ const ButtonContainer = styled.div`
   display: flex;
 `;
 
-const Favorites = ({ favorites = [] }) => {
-  const [toggleRemove, setToggleRemove] = useState(false);
-
-  // const renderFavorites = favorites.map(movie => (
-  //   <MovieCard key={movie.id} movie={movie} removeMode={toggleRemove} />
-  // ));
+const Favorites = ({ favorites = [], removeMode, dispatch }) => {
+  useEffect(() => {
+    return () => dispatch({ type: REMOVEMODE_TOGGLED, payload: false });
+  }, []);
 
   return (
     <Wrapper>
-      {console.log(favorites.length, "favortires")}
       {favorites.length > 0 ? (
         <>
           <PageText>Your list of favorites!</PageText>
           <ButtonContainer>
-            <RemoveModeButton onClick={() => setToggleRemove(!toggleRemove)}>
-              {toggleRemove ? "Disable Remove Mode" : "Enable Remove Mode"}
+            <RemoveModeButton
+              onClick={() =>
+                dispatch({ type: REMOVEMODE_TOGGLED, payload: !removeMode })
+              }
+            >
+              {removeMode ? "Disable Remove Mode" : "Enable Remove Mode"}
             </RemoveModeButton>
           </ButtonContainer>
 
-          <MovieList />
+          <MovieList showFavorites={true} />
         </>
       ) : (
         <PageText>
@@ -78,9 +80,10 @@ const Favorites = ({ favorites = [] }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    favorites: state.favorites.favoritesList
+    favorites: state.favorites.favoritesList,
+    removeMode: state.favorites.removeMode,
   };
 };
 

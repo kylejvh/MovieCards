@@ -9,12 +9,12 @@ const StyledLink = styled(NavLink)`
   border: none;
 
   background: none;
-  margin: 0 1.35em;
-  padding-bottom: 0.05em;
+  margin: 0 1.35rem;
+  padding-bottom: 0.05rem;
   outline: none;
   text-decoration: none;
 
-  font-size: 1em;
+  font-size: 1rem;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
   color: rgb(135, 135, 135);
@@ -32,13 +32,13 @@ const StyledNavbar = styled.nav`
   z-index: 999;
   bottom: 0;
   left: 0;
-  padding: 0.5em 0;
+  padding: 0.5rem 0;
 
   width: 100%;
 
   background: rgba(0, 0, 0, 0.65);
 
-  @media screen and (min-width: 1824px) {
+  /* @media screen and (min-width: 1824px) {
     font-size: 24px;
   }
 
@@ -55,7 +55,7 @@ const StyledNavbar = styled.nav`
   @media screen and (max-width: 380px) {
     font-size: 12px;
     justify-content: center;
-  }
+  } */
 `;
 
 const activeStyle = {
@@ -72,8 +72,6 @@ const Navbar = ({ backdrops, videos }) => {
 
   return (
     <StyledNavbar>
-      {console.log(videos, "videos")}
-
       <StyledLink exact to={`${url}/details`} activeStyle={activeStyle}>
         Details
       </StyledLink>

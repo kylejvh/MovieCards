@@ -20,12 +20,19 @@ const CardContainer = styled.div`
 
   border-radius: 10px 10px 0 0;
   transition: transform ease 300ms;
-
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
   color: white;
 
   :hover {
     cursor: pointer;
-    transform: scale(1.08);
+
+    backface-visibility: hidden;
+    transform: scale(1.05);
+  }
+
+  :active {
+    transform: translateY(-0.1rem);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   }
 
   @media screen and (max-width: 3000px) {
@@ -95,7 +102,7 @@ const RatingIcon = styled(FontAwesomeIcon).attrs({ icon: faStar })`
   margin: 0 0.25rem 0 0;
 `;
 
-const MovieCard = props => {
+const MovieCard = (props) => {
   const { path } = useRouteMatch();
 
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
@@ -111,7 +118,7 @@ const MovieCard = props => {
 
   const imageURL = `https://image.tmdb.org/t/p/w780${poster_path}`;
 
-  const convertRuntime = num => {
+  const convertRuntime = (num) => {
     let hours = num / 60;
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
@@ -159,4 +166,12 @@ const MovieCard = props => {
   );
 };
 
-export default connect(null, { handleMovieClick, removeFavorite })(MovieCard);
+const mapStateToProps = (state) => {
+  return {
+    removeMode: state.favorites.removeMode,
+  };
+};
+
+export default connect(mapStateToProps, { handleMovieClick, removeFavorite })(
+  MovieCard
+);

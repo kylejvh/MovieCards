@@ -12,7 +12,7 @@ import {
   ADDED_FAVORITE,
   REMOVED_FAVORITE,
   VIDEO_CLICKED,
-  MOVIE_CLICKED
+  MOVIE_CLICKED,
 } from "./types";
 
 import { TMDB_API_KEY } from "../apis/tmdb/key";
@@ -23,7 +23,7 @@ import youtube from "../apis/youtube/youtube";
 
 import history from "../components/history";
 
-export const handleMovieClick = (id, path) => async dispatch => {
+export const handleMovieClick = (id, path) => async (dispatch) => {
   dispatch({ type: MOVIE_CLICKED, payload: id });
 
   let navigationPath = `${path}/${id}/details`;
@@ -32,7 +32,7 @@ export const handleMovieClick = (id, path) => async dispatch => {
 };
 
 //! Make One fetchMovie function with optional args or handling for multiple requests...
-export const fetchMovie = url => async dispatch => {
+export const fetchMovie = (url) => async (dispatch) => {
   dispatch({ type: FETCH_MOVIE_INITIATED });
 
   try {
@@ -45,7 +45,7 @@ export const fetchMovie = url => async dispatch => {
   }
 };
 
-export const fetchMovies = (url, query = "") => async dispatch => {
+export const fetchMovies = (url, query = "") => async (dispatch) => {
   if (query) {
     dispatch({ type: SEARCH_QUERY_SUBMITTED, payload: query });
   }
@@ -56,7 +56,7 @@ export const fetchMovies = (url, query = "") => async dispatch => {
     const response = await tmdb.get(url);
 
     await Promise.all(
-      response.data.results.map(async movie => {
+      response.data.results.map(async (movie) => {
         const responseDetails = await tmdb.get(
           `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_API_KEY}&&language=en-US`
         );
@@ -72,7 +72,7 @@ export const fetchMovies = (url, query = "") => async dispatch => {
   }
 };
 
-export const fetchTrailers = trailerIds => async dispatch => {
+export const fetchTrailers = (trailerIds) => async (dispatch) => {
   dispatch({ type: FETCH_TRAILERS_INITIATED });
 
   try {
@@ -80,8 +80,8 @@ export const fetchTrailers = trailerIds => async dispatch => {
       params: {
         id: trailerIds,
         part: "snippet,contentDetails,statistics",
-        key: YOUTUBE_API_KEY
-      }
+        key: YOUTUBE_API_KEY,
+      },
     });
 
     dispatch({ type: FETCH_TRAILERS_SUCCEEDED, payload: response.data.items });
@@ -91,43 +91,46 @@ export const fetchTrailers = trailerIds => async dispatch => {
   }
 };
 
-export const onVideoSelect = video => {
-  console.log("vid triggered...");
+export const onVideoSelect = (video) => {
   return { type: VIDEO_CLICKED, payload: video };
 };
 
-export const addFavorite = movie => (dispatch, getState) => {
+export const addFavorite = (movie) => (dispatch, getState) => {
   const { favoritesList } = getState().favorites;
-  console.log("add fav trigged.", favoritesList);
-  console.log(movie, "addedfav movie");
 
   if (favoritesList.length === 0) {
-    // If no favorites exist, clone the movie and copy into newArray.
-    console.log("length is zero...");
-    let newArray = [];
-    let deepClone = JSON.parse(JSON.stringify(movie));
-    newArray = [...newArray, deepClone];
-    console.log(newArray, "added fav");
-    return dispatch({ type: ADDED_FAVORITE, payload: newArray });
+    // initial fav added, and saved to localstorage.
+    localStorage.setItem("favorites", JSON.stringify([movie]));
+    return dispatch({ type: ADDED_FAVORITE, payload: movie });
   } else if (favoritesList.length > 0) {
-    let newArray = favoritesList.slice();
+    // If multiple favorites exist, handle duplicates. If none, append state and localstorage.
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
 
-    if (newArray.find(item => item.id === movie.id)) {
+    if (storedFavorites.find((i) => i.id === movie.id)) {
+      //TODO: Add notifications for error handling.
       return console.log("match found via find");
+    } else {
+      localStorage.setItem(
+        "favorites",
+        JSON.stringify([...storedFavorites, movie])
+      );
+
+      return dispatch({ type: ADDED_FAVORITE, payload: movie });
     }
-
-    // If no duplicates exist, add to favorites list.
-
-    let deepClone = JSON.parse(JSON.stringify(movie));
-    newArray = [...newArray, deepClone];
-    return dispatch({ type: ADDED_FAVORITE, payload: newArray });
   }
 };
 
-export const removeFavorite = movie => (dispatch, getState) => {
+export const removeFavorite = (movie) => (dispatch, getState) => {
   const { favoritesList } = getState().favorites;
+  const storedFavorites = JSON.parse(localStorage.getItem("favorites"));
 
-  const newFavorites = favoritesList.filter(item => item.id !== movie.id);
+  const newFavorites = favoritesList.filter((i) => i.id !== movie.id);
+
+  const filteredStoredFavorites = storedFavorites.filter(
+    (i) => i.id !== movie.id
+  );
+
+  localStorage.setItem("favorites", JSON.stringify(filteredStoredFavorites));
 
   dispatch({ type: REMOVED_FAVORITE, payload: newFavorites });
 };

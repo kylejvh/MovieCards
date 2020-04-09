@@ -44,7 +44,7 @@ const ImageContainer = styled.div`
 `;
 
 const Heading = styled.h1`
-  font-size: 1.5em;
+  font-size: 1.5rem;
 `;
 
 const Content = styled.div`
@@ -65,7 +65,7 @@ const ModalImage = styled.img`
 `;
 
 const ScrollButton = styled.button`
-  width: 3em;
+  width: 3rem;
 
   color: white;
   background: none;
@@ -94,7 +94,7 @@ const ProgressText = styled(Heading)`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0.25em;
+  margin: 0.25rem;
 `;
 
 const ImageModal = ({

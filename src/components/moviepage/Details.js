@@ -1,86 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import * as S from "./styles";
 
 import { connect } from "react-redux";
 import { addFavorite, removeFavorite } from "../../actions";
 
-import Chip from "@material-ui/core/Chip";
 import { ChevronLeft } from "styled-icons/material/ChevronLeft";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
-// import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { useMediaQuery } from "react-responsive";
-import moment from "moment";
 
-import { Link, useParams } from "react-router-dom";
+import moment from "moment";
 
 import Button from "../Helper/Button";
 import Trailer from "../Helper/Trailer";
 import AddFavoriteButton from "../Helper/AddFavoriteButton";
-
-// import ExpandButton from "../components/ExpandButton";
-
-const MasterContainer = styled.div`
-  background: linear-gradient(
-      270deg,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.35) 50%,
-      rgba(0, 0, 0, 0.92) 60%,
-      rgba(0, 0, 0, 1) 100%
-    ),
-    no-repeat center center url(${props => props.posterPath});
-  background-size: cover;
-  height: 100vh;
-  /* box-shadow: inset 0px 0px 3em 0px rgba(0, 0, 0, 0.75);  */
-  font-size: 24px;
-  color: white;
-  display: flex;
-  background-color: #2c3949;
-
-  @media screen and (min-width: 1025px) {
-    font-size: 16px;
-  }
-
-  @media screen and (min-width: 1824px) {
-    font-size: 22px;
-  }
-
-  @media screen and (min-width: 2400px) {
-    font-size: 30px;
-  }
-
-  @media screen and (min-width: 3000px) {
-    font-size: 45px;
-  }
-`;
-
-const BackButton = styled(Link)`
-  margin: 0.5rem;
-  padding: 0.1em;
-  border: none;
-  outline: none;
-  border-radius: 0.5rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  color: white;
-  font-size: 1.5rem;
-  justify-self: center;
-  align-self: center;
-  transition: background 250ms ease-in-out, transform 150ms ease;
-  text-decoration: none;
-  background: #2769b4;
-
-  :hover {
-    cursor: pointer;
-  }
-
-  :active {
-    transform: scale(1.1);
-    background: #008080;
-  }
-`;
 
 const ButtonContainer = styled.div`
   margin: 1em 0 0 0;
@@ -89,39 +21,6 @@ const ButtonContainer = styled.div`
   @media screen and (max-width: 1023px) {
     margin: 0 auto;
   }
-`;
-
-const DesktopBackButton = styled(BackButton)`
-  padding: 0.2em 0.5em 0.2em 0;
-`;
-
-const LeftContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* background: linear-gradient(360deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)); */
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  height: 100%;
-  flex: 1;
-  /* background: linear-gradient(
-    90deg,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.5) 80%,
-    rgba(0, 0, 0, 0.2) 90%,
-    rgba(0, 0, 0, 0) 100%
-  ); */
-  /* margin: 3em 2.5em 0 2.5em; */
-  padding: 0 2.5em 0 2.5em;
-`;
-
-const Poster = styled.img`
-  width: 18em;
-  max-width: 100%;
-  height: auto;
-  /* box-shadow: 10px 10px 38px 19px rgba(255, 255, 255, 0.1);
-  filter: blur(0.0001em); */
-  margin: 3em 0 1em 0;
 `;
 
 const CenterContainer = styled.div`
@@ -139,7 +38,7 @@ const CenterContainer = styled.div`
   ); */
   /* box-shadow: 0 0 5px 15px rgba(0, 0, 0, 0.93); */
 
-  margin: 3em 1.5em;
+  margin: 3rem 1.5rem;
 
   @media screen and (max-width: 1023px) {
     font-size: 14px;
@@ -159,11 +58,6 @@ const CenterContainer = styled.div`
     align-items: stretch;
   }
 `;
-
-// const CastContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `;
 
 const BottomContainer = styled.div`
   display: flex;
@@ -307,11 +201,11 @@ const Details = ({
   videos = [],
   favorites = [],
   addFavorite,
-  removeFavorite
+  removeFavorite,
 }) => {
-  let genresArray = movie ? movie.genres.map(item => item.name) : null;
+  let genresArray = movie ? movie.genres.map((item) => item.name) : null;
 
-  const convertRuntime = num => {
+  const convertRuntime = (num) => {
     let hours = num / 60;
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
@@ -326,7 +220,7 @@ const Details = ({
     : null;
 
   let isInFavorites = false;
-  if (favorites.find(item => item.id === movie.id)) {
+  if (favorites.find((item) => item.id === movie.id)) {
     isInFavorites = true;
   }
 
@@ -335,12 +229,11 @@ const Details = ({
 
   return (
     <>
-      {console.log(favorites, "videos")}
       {movie ? (
         <CenterContainer>
           <Header>
             <h1>{movie.title}</h1>
-            <TaglineText>{movie.tagline}</TaglineText>
+            {movie.tagline && <TaglineText>{movie.tagline}</TaglineText>}
             <h2>{genresArray.join(", ")}</h2>
             <div style={{ display: "flex", marginTop: ".35em" }}>
               {movie.runtime !== 0 && (
@@ -390,9 +283,15 @@ const Details = ({
           </BottomContainer>
 
           <ButtonContainer>
-            {/* {videos.results === [] ? null : (
+            {/*!! The below code cannot use === [], because arrays are stored by reference, and matching videos.results to [] will eval to false, because they are not the same reference in memory.
+            You should use if (array.property.length), 
+            because the prop exists and its length is 0, it will be falsey.
+            If it doesn't exist, falsey.
+            If it's > 0, it will be truthy.
+            */}
+            {/* {videos.results.length ? (
               <Trailer urlKey={videos.results[0].key} />
-            )} */}
+             : null )} */}
             {isInFavorites ? (
               <Button
                 title={"Remove from List"}
@@ -408,11 +307,11 @@ const Details = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     movie: state.movie.movie,
     videos: state.movie.videos,
-    favorites: state.favorites.favoritesList
+    favorites: state.favorites.favoritesList,
   };
 };
 

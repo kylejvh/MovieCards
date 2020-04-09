@@ -34,17 +34,20 @@ const MovieContainer = styled.div`
   }
 `;
 
-const MovieList = ({ movies }) => {
-  const renderMovieCards = movies.map(movie => (
+const MovieList = ({ movies, favorites, showFavorites = false }) => {
+  let renderedList = showFavorites ? favorites : movies;
+
+  const renderMovieCards = renderedList.map((movie) => (
     <MovieCard key={movie.id} movie={movie}></MovieCard>
   ));
 
   return <MovieContainer>{renderMovieCards}</MovieContainer>;
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    movies: state.movies.movies
+    movies: state.movies.movies,
+    favorites: state.favorites.favoritesList,
   };
 };
 
