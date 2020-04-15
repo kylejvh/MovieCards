@@ -2,9 +2,7 @@
 
 ## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
 
-> This project represents my journey
-> into creating a robustly featured and continuously
-> developed React App.
+> A robustly featured and continuously developed React application, utilizing The Movie Database API to display movie data.
 
 ![](demo.gif)
 
