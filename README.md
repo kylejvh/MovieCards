@@ -2,9 +2,7 @@
 
 ## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
 
-> This project represents my journey
-> into creating a robustly featured and continuously
-> developed React App.
+> A robustly featured and continuously developed React application, utilizing The Movie Database API to display movie data.
 
 ![](demo.gif)
 
@@ -12,11 +10,11 @@
 
 ## Features
 
-View upcoming movies that are not currently released, movies that are currently popular, or search for your own.
+Browse movies by popularity, release date, or search. 
 
-Add movies to your favorites list for quick access.
+Save movies to a persistent favorites list for quick access any time.
 
-View detailed movie information like runtimes, ratings, release dates, cast/crew data, and trailers.
+View detailed movie information like runtimes, ratings, images, cast/crew data, and trailers.
 
 ---
 
