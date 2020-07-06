@@ -1,6 +1,6 @@
 # MovieCards
 
-## **<a href="https://kjvh-moviecards.herokuapp.com/" target="_blank">Click here to demo</a>**
+## **<a href="https://moviecards.kylejvh.com/" target="_blank">Click here to demo</a>**
 
 > A robustly featured and continuously developed React application, utilizing The Movie Database API to display movie data.
 
