@@ -1,8 +1,6 @@
 import { createBrowserHistory } from "history";
 
 // deployment
-const history = createBrowserHistory({ basename: "/MovieCards" });
+const history = createBrowserHistory();
 
-export default process.env.NODE_ENV === "development"
-  ? createBrowserHistory()
-  : history;
+export default history;
