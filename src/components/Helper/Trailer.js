@@ -3,8 +3,6 @@ import styled from "styled-components";
 
 import { Play } from "styled-icons/fa-solid/Play";
 
-// import ReactPlayer from "react-player";
-
 const PlayButton = styled.button`
   margin: 0.5rem;
   padding: 0.3rem 0.5rem;

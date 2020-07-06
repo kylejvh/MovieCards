@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { TMDB_API_KEY } from "../apis/tmdb/key";
 
-import { fetchMovies } from "../actions";
+import { fetchMovies } from "../actionCreators/fetchMovies";
 import Loader from "../components/Helper/Loader";
 import MovieList from "../components/movielist/MovieList";
 
@@ -48,10 +48,10 @@ const UpcomingMovies = ({ fetchMovies, isError, isLoading }) => {
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     isError: state.movies.isError,
-    isLoading: state.movies.isLoading
+    isLoading: state.movies.isLoading,
   };
 };
 

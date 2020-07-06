@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { TMDB_API_KEY } from "../apis/tmdb/key";
-import { fetchMovie } from "../actions";
+import { fetchMovie } from "../actionCreators/fetchMovie";
 import { Route, Switch, useRouteMatch, withRouter } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
@@ -77,7 +77,7 @@ const Left = styled.div`
 `;
 
 const Right = styled.div`
-  background: no-repeat center url(${props => props.posterPath});
+  background: no-repeat center url(${(props) => props.posterPath});
   background-size: cover;
 
   width: 70%;
@@ -124,7 +124,7 @@ const Bot = styled.div`
 `;
 
 const Top = styled.div`
-  background: no-repeat center url(${props => props.posterPath});
+  background: no-repeat center url(${(props) => props.posterPath});
   background-size: cover;
 
   height: 70%;
@@ -146,7 +146,7 @@ const MasterWrap = styled.div`
   }
 `;
 
-const NewMoviePage = props => {
+const NewMoviePage = (props) => {
   const {
     movie = "",
     videos,
@@ -155,7 +155,7 @@ const NewMoviePage = props => {
     clickedMovieId,
     fetchMovie,
     isLoading,
-    isError
+    isError,
   } = props;
 
   const isMobileOrTablet = useMediaQuery({ query: "(max-width: 1023px)" });
@@ -310,13 +310,13 @@ const NewMoviePage = props => {
         </MasterContainer> */
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     movie: state.movie.movie,
     images: state.movie.images,
     clickedMovieId: state.movie.clickedMovieId,
     isLoading: state.movie.isLoading,
-    isError: state.movie.isError
+    isError: state.movie.isError,
   };
 };
 

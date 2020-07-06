@@ -5,10 +5,9 @@ import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
-
-import { handleMovieClick, removeFavorite } from "../../actions";
+import { handleMovieClick } from "../../actionCreators/handleMovieClick";
+import { removeFavorite } from "../../actionCreators/removeFavorite";
 import AltPoster from "./posterplaceholder.jpg";
-import RemoveFavoriteButton from "../Helper/RemoveFavoriteButton";
 
 const CardContainer = styled.div`
   position: relative;
@@ -157,20 +156,13 @@ const MovieCard = (props) => {
       />
       {renderRuntime}
       {renderRating}
-      {props.removeMode && (
-        <RemoveFavoriteButton
-          onClick={() => props.removeFavorite(props.movie)}
-        />
-      )}
     </CardContainer>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    removeMode: state.favorites.removeMode,
-  };
-};
+const mapStateToProps = ({ favorites }) => ({
+  removeMode: favorites.removeMode,
+});
 
 export default connect(mapStateToProps, { handleMovieClick, removeFavorite })(
   MovieCard

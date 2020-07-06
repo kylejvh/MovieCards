@@ -95,11 +95,9 @@ const Navbar = ({ backdrops, videos }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    backdrops: state.movie.images.backdrops,
-    videos: state.movie.videos.results,
-  };
-};
+const mapStateToProps = ({ movie }) => ({
+  backdrops: movie.images.backdrops,
+  videos: movie.videos.results,
+});
 
 export default connect(mapStateToProps)(Navbar);

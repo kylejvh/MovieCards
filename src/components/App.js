@@ -92,7 +92,7 @@ const App = () => {
               "/popular/:id",
               "/upcoming/:id",
               "/search/:id",
-              "/favorites/:id"
+              "/favorites/:id",
             ]}
             component={NewMoviePage}
           />

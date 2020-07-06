@@ -1,19 +1,18 @@
 import React from "react";
 import styled from "styled-components";
-import * as S from "./styles";
-
 import { connect } from "react-redux";
-import { addFavorite, removeFavorite } from "../../actions";
-
+import { addFavorite } from "../../actionCreators/addFavorite";
+import { removeFavorite } from "../../actionCreators/removeFavorite";
 import { ChevronLeft } from "styled-icons/material/ChevronLeft";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faStopwatch } from "@fortawesome/free-solid-svg-icons";
+import { Plus } from "styled-icons/fa-solid/Plus";
+import { Delete } from "styled-icons/material/Delete";
 
 import moment from "moment";
 
-import Button from "../Helper/Button";
+import CustomButton from "../Helper/CustomButton";
 import Trailer from "../Helper/Trailer";
-import AddFavoriteButton from "../Helper/AddFavoriteButton";
 
 const ButtonContainer = styled.div`
   margin: 1em 0 0 0;
@@ -197,6 +196,20 @@ const TaglineText = styled.h3`
   }
 `;
 
+const PlusIcon = styled(Plus)`
+  color: white;
+  width: 1.1em;
+  height: 1.1em;
+  margin: 0em 0.35em;
+`;
+
+const DeleteIcon = styled(Delete)`
+  color: white;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0 0.35em;
+`;
+
 const Details = ({
   movie = [],
   videos = [],
@@ -293,14 +306,15 @@ const Details = ({
             {/* {videos.results.length ? (
               <Trailer urlKey={videos.results[0].key} />
              : null )} */}
-            {isInFavorites ? (
-              <Button
-                title={"Remove from List"}
-                onClick={() => removeFavorite(movie)}
-              ></Button>
-            ) : (
-              <AddFavoriteButton onClick={() => addFavorite(movie)} />
-            )}
+
+            <CustomButton
+              title={isInFavorites ? "Remove from List" : "Add to List"}
+              icon={isInFavorites ? <DeleteIcon /> : <PlusIcon />}
+              cypressId={isInFavorites ? "removeFavorite" : "addFavorite"}
+              onClick={() =>
+                isInFavorites ? removeFavorite(movie) : addFavorite(movie)
+              }
+            ></CustomButton>
           </ButtonContainer>
         </CenterContainer>
       ) : null}
@@ -308,13 +322,11 @@ const Details = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    movie: state.movie.movie,
-    videos: state.movie.videos,
-    favorites: state.favorites.favoritesList,
-  };
-};
+const mapStateToProps = ({ movie, favorites }) => ({
+  movie: movie.movie,
+  videos: movie.videos,
+  favorites: favorites.favoritesList,
+});
 
 export default connect(mapStateToProps, { addFavorite, removeFavorite })(
   Details

@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { connect } from "react-redux";
-import { fetchMovie } from "../actions";
+import { fetchMovie } from "../actionCreators/fetchMovie";
 
 import "typeface-roboto";
 import Chip from "@material-ui/core/Chip";
@@ -37,7 +37,7 @@ const MobileContainer = styled.div`
       rgba(44, 57, 73, 1) 70%
     ),
     /* linear-gradient(360deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)), */
-      no-repeat center center url(${props => props.posterPath});
+      no-repeat center center url(${(props) => props.posterPath});
 
   @media screen and (min-width: 700px) {
     background: linear-gradient(
@@ -48,7 +48,7 @@ const MobileContainer = styled.div`
         rgba(44, 57, 73, 1) 70%,
         rgba(44, 57, 73, 0.99) 100%
       ),
-      no-repeat center center url(${props => props.posterPath});
+      no-repeat center center url(${(props) => props.posterPath});
     background-size: cover;
   }
 
@@ -187,7 +187,7 @@ const BackIcon = styled(ChevronLeft)`
 
 const MasterContainer = styled.div`
   background: linear-gradient(360deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.25)),
-    no-repeat center center url(${props => props.posterPath});
+    no-repeat center center url(${(props) => props.posterPath});
   background-size: cover;
   height: 100vh;
   /* box-shadow: inset 0px 0px 3em 0px rgba(0, 0, 0, 0.75);  */
@@ -307,7 +307,7 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
 
   // let genresArray = movie.genres ? movie.genres.map(item => item.name) : [];
 
-  const convertRuntime = num => {
+  const convertRuntime = (num) => {
     let hours = num / 60;
     let rhours = Math.floor(hours);
     let minutes = (hours - rhours) * 60;
@@ -324,7 +324,7 @@ const FullMoviePage = ({ movie, videos, images, credits, fetchMovie }) => {
   const isLargeTablet = useMediaQuery({ query: "(min-width: 680px)" });
 
   const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1025px)"
+    query: "(min-width: 1025px)",
   });
 
   let isError = false;

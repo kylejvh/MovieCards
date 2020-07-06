@@ -20,7 +20,7 @@ const DeleteButton = styled.button`
 const DeleteIcon = styled(Delete)`
   :hover {
     cursor: pointer;
-    transform: scale(1.08);
+    transform: scale(1.03);
   }
 `;
 

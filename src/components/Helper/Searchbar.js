@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
-import { fetchMovies, handleSearchSubmit } from "../../actions";
+import { fetchMovies } from "../../actionCreators/fetchMovies";
 import { TMDB_API_KEY } from "../../apis/tmdb/key";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
@@ -74,13 +74,11 @@ const SearchIcon = styled(FontAwesomeIcon).attrs({ icon: faSearch })`
   font-size: 0.85em;
 `;
 
-// Passes query entered in Text Input into onSubmit, which takes in modified URL query as param and sends it to axiosFetch hook.
 const Search = ({ inline, fetchMovies, submittedQuery }) => {
   const [query, setQuery] = useState("");
   const location = useLocation();
   const history = useHistory();
 
-  //! send a message along to prompt user to input something...
   const handleSearchSubmit = (event, url, query, inline) => {
     event.preventDefault();
 
@@ -118,7 +116,6 @@ const Search = ({ inline, fetchMovies, submittedQuery }) => {
         value={query}
         onChange={(event) => setQuery(event.target.value)}
       />
-      {console.log(inline)}
       <StyledButton type="submit" inlineForm={inline}>
         <SearchIcon />
       </StyledButton>

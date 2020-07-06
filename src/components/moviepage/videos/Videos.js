@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-
 import { connect } from "react-redux";
-
-import { fetchTrailers, onVideoSelect } from "../../../actions";
+import { fetchTrailers } from "../../../actionCreators/fetchTrailers";
+import { onVideoSelect } from "../../../actionCreators/onVideoSelect";
 import Loader from "../../Helper/Loader";
-
 import { ChevronDown } from "styled-icons/boxicons-regular/ChevronDown";
-
 import VideoDetail from "./VideoDetail";
 import ScrollContainer from "../ScrollContainer";
 import ComposedScrollContainer from "../ComposedScrollContainer";
@@ -53,9 +50,9 @@ const Videos = ({
   onVideoSelect,
   clickedVideo,
   isLoading,
-  isError
+  isError,
 }) => {
-  const trailerKeys = videos.map(video => video.key).join(",");
+  const trailerKeys = videos.map((video) => video.key).join(",");
 
   //! RUN THIS When newpage mounts, not videos??
   useEffect(() => {
@@ -111,13 +108,13 @@ const Videos = ({
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     videos: state.movie.videos.results,
     trailers: state.trailers.trailers,
     clickedVideo: state.trailers.clickedVideo,
     isError: state.trailers.isError,
-    isLoading: state.trailers.isLoading
+    isLoading: state.trailers.isLoading,
   };
 };
 

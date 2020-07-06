@@ -157,12 +157,10 @@ const Images = ({ backdrops = [], title = "" }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    backdrops: state.movie.images.backdrops,
-    posters: state.movie.images.posters,
-    title: state.movie.movie.title,
-  };
-};
+const mapStateToProps = ({ movie }) => ({
+  backdrops: movie.images.backdrops,
+  posters: movie.images.posters,
+  title: movie.movie.title,
+});
 
 export default connect(mapStateToProps)(Images);

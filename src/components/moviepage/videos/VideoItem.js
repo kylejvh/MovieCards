@@ -1,7 +1,7 @@
 import React from "react";
 
 import { connect } from "react-redux";
-import { onVideoSelect } from "../../../actions";
+import { onVideoSelect } from "../../../actionCreators/onVideoSelect";
 
 import { PlayCircle } from "styled-icons/fa-regular/PlayCircle";
 import styled from "styled-components";

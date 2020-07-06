@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
-import { fetchMovies } from "../actions";
+import { fetchMovies } from "../actionCreators/fetchMovies";
 import { TMDB_API_KEY } from "../apis/tmdb/key";
 import Loader from "../components/Helper/Loader";
 import MovieList from "../components/movielist/MovieList";
@@ -47,11 +47,9 @@ const PopularMovies = ({ isError, isLoading, fetchMovies }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isError: state.movies.isError,
-    isLoading: state.movies.isLoading,
-  };
-};
+const mapStateToProps = ({ movies }) => ({
+  isError: movies.isError,
+  isLoading: movies.isLoading,
+});
 
 export default connect(mapStateToProps, { fetchMovies })(PopularMovies);

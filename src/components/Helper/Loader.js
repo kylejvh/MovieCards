@@ -38,7 +38,7 @@ const Spinner = styled(Spinner5)`
 
 const Loader = () => {
   return (
-    <Container>
+    <Container data-cy="loadSpinner">
       <Spinner />
       <h1>Loading Results</h1>
     </Container>

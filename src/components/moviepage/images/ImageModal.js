@@ -1,33 +1,11 @@
+//@ts-check
+
 import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { ArrowLeftCircle } from "styled-icons/remix-fill/ArrowLeftCircle";
 import { ArrowRightCircle } from "styled-icons/remix-fill/ArrowRightCircle";
 import { WindowClose } from "styled-icons/fa-regular/WindowClose";
-import history from "../../history";
-
-// Reuseable Modal Component, optionally Uses SemanticUI for styling and React Router History to navigate out.
-
-// Uses React Portals, requires div with id root on index.html
-// Takes in Props of title, content, actions, and onDismiss. EX:
-{
-  /*    <Modal
-        title="Delete Stream"
-        content="Are you sure you want to delete this stream?"
-        actions={actions}
-        onDismiss={() => history.push("/")}
-      /> */
-}
-
-// Actions variable defined in parent, shows buttons on modal
-// const actions = (
-//   <div>
-//     <button className="ui button">Cancel</button>
-//     <button className="ui button negative">Delete</button>
-//   </div>
-// );
-
-// Uses history to promagatically navigate away from modal when user clicks off of modal
 
 const ImageContainer = styled.div`
   display: flex;

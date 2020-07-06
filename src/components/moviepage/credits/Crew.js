@@ -83,7 +83,7 @@ const Crew = ({ crew = [] }) => {
   // });
 
   const findPersonWithJob = (crew = [], jobName = "") => {
-    let searchedPerson = crew.find(person => person.job === jobName);
+    let searchedPerson = crew.find((person) => person.job === jobName);
 
     if (searchedPerson) {
       return searchedPerson.name;
@@ -97,8 +97,8 @@ const Crew = ({ crew = [] }) => {
   const composer = findPersonWithJob(crew, "Original Music Composer");
 
   const writers = crew
-    .filter(person => person.job === "Screenplay" || person.job === "Writer")
-    .map(person => person.name)
+    .filter((person) => person.job === "Screenplay" || person.job === "Writer")
+    .map((person) => person.name)
     .join(", ");
 
   return (
@@ -132,10 +132,8 @@ const Crew = ({ crew = [] }) => {
   );
 };
 
-const mapStateToProps = state => {
-  return {
-    crew: state.movie.credits.crew
-  };
-};
+const mapStateToProps = ({ movie }) => ({
+  crew: movie.credits.crew,
+});
 
 export default connect(mapStateToProps)(Crew);

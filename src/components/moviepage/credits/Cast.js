@@ -122,10 +122,8 @@ const Cast = ({ cast = [] }) => {
   );
 };
 
-const mapsStateToProps = (state) => {
-  return {
-    cast: state.movie.credits.cast,
-  };
-};
+const mapsStateToProps = ({ movie }) => ({
+  cast: movie.credits.cast,
+});
 
 export default connect(mapsStateToProps)(Cast);

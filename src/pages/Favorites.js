@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { REMOVEMODE_TOGGLED } from "../actions/types";
+import { REMOVEMODE_TOGGLED } from "../actionCreators/types";
 
 import MovieList from "../components/movielist/MovieList";
 
