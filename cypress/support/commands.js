@@ -33,8 +33,7 @@ Cypress.Commands.add("seedAndVisitMovie", (seedData = "fixture:avengersTestMovie
   cy.server();
   cy.route({
     method: "GET",
-    url:
-      "https://api.themoviedb.org/3/movie/299536?api_key=0aecc06bb4fadb06b5f071fef0c2ce6d&&language=en-US&append_to_response=credits,videos,images&include_image_language=en,null",
+   
     status: 200,
     response: seedData,
   });
@@ -43,7 +42,7 @@ Cypress.Commands.add("seedAndVisitMovie", (seedData = "fixture:avengersTestMovie
   // actually send request?
   //   cy.request({
   //     method: "GET",
-  //     url: "https://api.themoviedb.org/3/movie/299536?api_key=0aecc06bb4fadb06b5f071fef0c2ce6d&&language=en-US&append_to_response=credits,videos,images&include_image_language=en,null",
+  //     
   //     body: {
   //       email: Cypress.env("email"),
   //       password: Cypress.env("password"),
