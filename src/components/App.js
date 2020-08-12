@@ -81,7 +81,6 @@ const App = () => {
           patTitle={["/", "/upcoming", "/search", "/favorites"]}
           component={Navigation}
         /> */}
-        <Switch>
           <Redirect exact from="/" to="/popular" />
           <Route exact path="/popular" component={PopularMovies} />
           <Route exact path="/upcoming" component={UpcomingMovies} />
@@ -96,7 +95,6 @@ const App = () => {
             ]}
             component={NewMoviePage}
           />
-        </Switch>
         {/* <NotFound default /> */}
       </Router>
     </>
